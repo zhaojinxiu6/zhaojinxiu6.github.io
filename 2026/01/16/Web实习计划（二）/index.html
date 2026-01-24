@@ -1,0 +1,484 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Web实习计划（二） | 小阿修的博客</title><meta name="author" content="zhaojx"><meta name="copyright" content="zhaojx"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Web实习计划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web实习计划（二）">
+<meta property="og:url" content="http://example.com/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="小阿修的博客">
+<meta property="og:description" content="Web实习计划">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2026-01-16T14:00:37.000Z">
+<meta property="article:modified_time" content="2026-01-24T14:01:18.502Z">
+<meta property="article:author" content="zhaojx">
+<meta property="article:tag" content="区块链">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Web实习计划（二）",
+  "url": "http://example.com/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/",
+  "image": "http://example.com/img/avatar.jpg",
+  "datePublished": "2026-01-16T14:00:37.000Z",
+  "dateModified": "2026-01-24T14:01:18.502Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zhaojx",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/%5Bobject%20Object%5D"><link rel="canonical" href="http://example.com/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Web实习计划（二）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/background2.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/background3.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" alt="Logo"><span class="site-name">小阿修的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">Web实习计划（二）</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Web实习计划（二）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-16T14:00:37.000Z" title="发表于 2026-01-16 22:00:37">2026-01-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-24T14:01:18.502Z" title="更新于 2026-01-24 22:01:18">2026-01-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Web3%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92/">Web3实习计划</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Web实习计划（二）"><a href="#Web实习计划（二）" class="headerlink" title="Web实习计划（二）"></a>Web实习计划（二）</h1><h2 id="1-16"><a href="#1-16" class="headerlink" title="1.16"></a>1.16</h2><p>把这周的笔记汇总整理了一下。然后做钓鱼攻防任务ing。</p>
+<h2 id="1-17"><a href="#1-17" class="headerlink" title="1.17"></a>1.17</h2><h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><p>Solidity合约数据存储采用的为合约的每项数据指定一个可计算的可存储位置，数据存储在一个容量为2^256^超大数组中，其中数组的每个元素的初始值都为0。而2^256^是一个超级大的数字，足够容量合约需要任意大小的存储。Solidity是插槽式数据存储，每个插槽可存储32字节的数据，当某个数据超过了32字节，则需要占用多个存储插槽（占用插槽数量由数据长度决定，<code>data.length</code>&#x2F;32）。</p>
+<p>对于数据长度是否已知，solidity有不同的存储方式：</p>
+<ul>
+<li><p>当数据长度已知时，则存储位置将在编译时指定存储位置；</p>
+<ul>
+<li><p><strong>定长数据存储</strong>：Solidity编译器在编译合约时，当数据类型是值类型（固定大小的值）时，编译时将严格根据字段排序顺序，给每个要存储的值类型数据预分配存储位置。 相当于已提前指定了固定不变的数据指针。 </p>
+</li>
+<li><p><strong>紧凑存储</strong>：一大部分值类型实际上不需要用到 32 字节，如<code>bool</code>、<code>uint1</code> 到 <code>uint256</code>。 为了节约存储量，编译器在发现所用存储不超过 32 字节时，将会将其和后面字段尽可能的存储在一个存储中。 </p>
+<ul>
+<li><p>即使是<code>bool</code>类型，虽然取值只有true&#x2F;false(1&#x2F;0)，但是仍然占据1字节。</p>
+</li>
+<li><p>出于节省gas的目的，在编写合约代码时，即使声明的状态变量的数量及其类型发生不变，而变量的顺序发生变化有时也会有gas不同的差别。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity &gt;0.8.0;</span><br><span class="line">contract Storage1 &#123;</span><br><span class="line">	uint256 a = 11; // slot0 </span><br><span class="line"> 	uint8 b = 12; // slot1，1 字节</span><br><span class="line">	uint128 c = 13; // slot1，16 字节</span><br><span class="line">	bool d = true; // slot1，1 字节</span><br><span class="line">	uint128 e =  14;// slot2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract Storage2 &#123;</span><br><span class="line">	uint256 a = 11; // slot0 </span><br><span class="line"> 	uint8 b = 12; // slot1，1 字节</span><br><span class="line">	uint128 c = 13; // slot1，16 字节</span><br><span class="line">	uint128 e = 14;// slot2</span><br><span class="line">	bool d = true; // slot3，1 字节</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上述合约所示，只将变量e和d的顺序调换，占用插槽的数量也会不一样。<strong>鉴于这种紧凑存储原则，有效降低了存储占用。而以太坊存储是昂贵的，因此为了降低存储占用， 在编写合约时，记得注意状态变量的声明顺序。</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>而对于未知长度的数据时（比如动态数组，映射等）则按照一定的规则计算存储位置。</p>
+<ul>
+<li><code>string</code> 和  <code>bytes</code> 实际是一个特殊的 <code>array</code> ，编译器对这类数据有进行优化。如果 <code>string</code> 和  <code>bytes</code> 的数据很短。那么它们的长度也会和数据一起存储到同一个插槽。 具体为：<ul>
+<li>如果数据长度小于等于 31 字节， 则它存储在高位字节（左对齐），最低位字节存储 <code>length * 2</code>。</li>
+<li>如果数据长度超出 31 字节，则在主插槽存储 <code>length * 2 + 1</code>， 数据照常存储在 <code>keccak256(slot)</code> 中。</li>
+</ul>
+</li>
+<li>动态数组 <code>T[]</code> 由两部分组成，数组长度和元素值。在 <code>Solidity</code> 中定义动态数组后，将在定义的插槽位置存储数组元素数量， 元素数据存储的起始位置是：<code>keccak256(slot)+偏移量</code>，每个元素需要根据下标和元素大小来读取数据。</li>
+<li>映射的存储布局是直接存储 <code>Key</code> 对应的 <code>value</code>，每个 <code>Key</code> 对应一份存储。一个 <code>Key</code> 的对应存储位置是 <code>keccak256(abi.encode(key, slot))</code> ， 可直接获得 <code>value</code> 的存储。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-18"><a href="#1-18" class="headerlink" title="1.18"></a>1.18</h2><h3 id="ABI编解码函数："><a href="#ABI编解码函数：" class="headerlink" title="ABI编解码函数："></a>ABI编解码函数：</h3><ul>
+<li><code>abi.decode(bytes memory encodedData, (...)) returns (...)</code><ul>
+<li>根据传入的数据类型解码数据（<code>encode</code>，<code>encodePacked</code>均可解码）</li>
+<li>数据类型通过在括号中作为第二个参数给出。</li>
+<li>example：<code>(uint a, uint[2] memory b, bytes memory c) = abi.decode(data, (uint, uint[2], bytes))</code></li>
+</ul>
+</li>
+<li><code>abi.encode(...) returns (bytes memory)</code><ul>
+<li>对给定的数据进行 abi 编码</li>
+</ul>
+</li>
+<li><code>abi.encodePacked(...) returns (bytes memory)</code><ul>
+<li>对给定的数据进行紧密编码（此编码可能会不明确）</li>
+</ul>
+</li>
+<li><code>abi.encodeWithSelector(bytes4 selector, ...) returns (bytes memory)</code><ul>
+<li>从第二个数据开始，对给定的参数进行 ABI 编码，并在前面添加给定的 4 bytes 的函数选择器</li>
+<li>通过该内置函数，我们可以构造我们的 <code>calldata</code></li>
+</ul>
+</li>
+<li><code>abi.encodeCall(function functionPointer, (...) ) returns (bytes memory)</code><ul>
+<li>使用元组中找到的参数对 <code>functionPointer</code>的调用进行 ABI 编码。</li>
+<li>执行完整的类型检查，确保类型与函数签名匹配。</li>
+<li>结果等于 <code>abi.encodeWithSelector(functionPointer.selector, ...)</code></li>
+</ul>
+</li>
+<li><code>abi.encodeWithSignature(string memory signature, ...) returns (bytes memory)</code><ul>
+<li>相当于 <code>abi.encodeWithSelector(bytes4(keccak256(bytes(signature))), ...)</code></li>
+</ul>
+</li>
+</ul>
+<p>返回的是一个 <strong><code>bytes</code> 类型的动态数组</strong>，它本质上就是一个 <strong><code>byte</code> 数组</strong>，即 <code>bytes memory</code>，你当然可以通过索引（<code>data[i]</code>）访问和修改它的每一个字节。这会生成一个完整的 calldata：</p>
+<ul>
+<li>前 4 字节：函数选择器（<code>registerTreasury()</code> 的 keccak256 hash 前四位）</li>
+<li>后 32 字节：参数部分，但 ABI 会扩展成一个完整的 <code>uint256</code> 占满 32 字节（高位为 0）</li>
+</ul>
+<p>所以总共 4 + 32 &#x3D; 36 字节的数组。你能通过索引 <code>data[0] ... data[35]</code> 访问和修改任何一位。</p>
+<h5 id="拓展：abi-encode-string-concat-和-abi-encodePacked-这三者在-Solidity-中的主要作用是数据编码和字符串拼接，但它们的行为和适用场景有所不同："><a href="#拓展：abi-encode-string-concat-和-abi-encodePacked-这三者在-Solidity-中的主要作用是数据编码和字符串拼接，但它们的行为和适用场景有所不同：" class="headerlink" title="拓展：abi.encode(), string.concat(), 和 abi.encodePacked() 这三者在 Solidity 中的主要作用是数据编码和字符串拼接，但它们的行为和适用场景有所不同："></a>拓展：<code>abi.encode()</code>, <code>string.concat()</code>, 和 <code>abi.encodePacked()</code> 这三者在 Solidity 中的主要作用是数据编码和字符串拼接，但它们的行为和适用场景有所不同：</h5><h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">作用</th>
+<th align="center">返回类型</th>
+<th align="center">适用场景</th>
+<th align="center">是否适用于哈希计算</th>
+<th align="center">是否适用于字符串拼接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>abi.encode()</code></td>
+<td align="center"><strong>标准 ABI 编码</strong>（32 字节对齐）</td>
+<td align="center"><code>bytes</code></td>
+<td align="center"><strong>存储、参数传递、哈希安全</strong></td>
+<td align="center">是（无哈希冲突）</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center"><code>string.concat()</code></td>
+<td align="center"><strong>字符串拼接</strong></td>
+<td align="center"><code>string</code></td>
+<td align="center"><strong>字符串操作</strong></td>
+<td align="center">否</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center"><code>abi.encodePacked()</code></td>
+<td align="center"><strong>紧凑编码</strong>（可能导致哈希冲突）</td>
+<td align="center"><code>bytes</code></td>
+<td align="center"><strong>哈希计算</strong>（但可能冲突）</td>
+<td align="center">可能冲突</td>
+<td align="center">但需转换成 <code>string</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="什么时候用？"><a href="#什么时候用？" class="headerlink" title="什么时候用？"></a>什么时候用？</h5><ul>
+<li><strong>拼接字符串</strong> ➝  <strong><code>string.concat()</code></strong></li>
+<li><strong>计算哈希</strong> ➝  <strong><code>abi.encodePacked()</code>（注意哈希冲突）</strong></li>
+<li><strong>存储数据、避免哈希冲突</strong> ➝  <strong><code>abi.encode()</code></strong></li>
+</ul>
+<h2 id="1-19"><a href="#1-19" class="headerlink" title="1.19"></a>1.19</h2><p>今天把Crowdfunding挑战完成，也算是第一次利用hardhat框架去完成项目了。</p>
+<h2 id="1-20"><a href="#1-20" class="headerlink" title="1.20"></a>1.20</h2><p>完成Dapp开发任务，然后又复现了Ethernaut的几个关卡。算是重温之前学的知识了。</p>
+<p>然后又回顾了点UniswapV2的知识。</p>
+<h2 id="1-21"><a href="#1-21" class="headerlink" title="1.21"></a>1.21</h2><p>今天完成挑战 Challenge - Tokenization，然后回顾了gas优化和合约安全方面的知识。</p>
+<h2 id="1-22"><a href="#1-22" class="headerlink" title="1.22"></a>1.22</h2><p>被反应式智能合约Uniswap V2 止损订单折磨麻了，环境变量给的不明确，只能去尝试。到现在也没有完成demo</p>
+<h2 id="1-23"><a href="#1-23" class="headerlink" title="1.23"></a>1.23</h2><p>今天在搭SpoonOS ing，闹麻了。明天继续配</p>
+<h2 id="1-24"><a href="#1-24" class="headerlink" title="1.24"></a>1.24</h2><p>又配失败了遂放弃。学习了一点gas优化</p>
+<h3 id="gas-优化技巧"><a href="#gas-优化技巧" class="headerlink" title="gas 优化技巧"></a>gas 优化技巧</h3><p><strong>注意事项</strong>：</p>
+<ul>
+<li><p>gas 优化技巧并不总是有效</p>
+<ul>
+<li>例如在if else判断时，和条件取正相比，条件取反会消耗额外的操作码。令人意外的是，有很多情况下，这种优化实际上会增加交易的成本。Solidity编译器有时是不可预测的。</li>
+<li>因此，在选择特定算法之前，你应该实际测量替代方案的效果。考虑这些技巧可以认识到编译器一些可能会让人惊讶的地方。Gas 优化技巧有时取决于编译器在本地的操作。通常应同时测试代码的最优版本和非最优版本，以查看是否真正获得了改进。我们将记录一些令人惊讶的情况，即本应导致优化的情况实际上导致了更高的成本。</li>
+</ul>
+</li>
+<li><p>注意复杂性和可读性</p>
+<ul>
+<li>gas优化通常会使代码变得更难度和更复杂，我们需要在主观上去进行权衡这部分的gas优化是否是值得的。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-最重要的是：尽可能避免零到一的存储写入"><a href="#1-最重要的是：尽可能避免零到一的存储写入" class="headerlink" title="1. 最重要的是：尽可能避免零到一的存储写入"></a>1. 最重要的是：尽可能避免零到一的存储写入</h4><p>初始化存储变量是合约可以执行的最昂贵的操作之一。</p>
+<p>当存储变量从零变为非零时，用户必须支付总共22,100 gas（20,000 gas 用于从零到非零的写入，2,100 gas 用于冷存储访问）。</p>
+<p>这就是为什么 Openzeppelin 的重入保护使用1和2来注册函数的活动状态，而不是0和1。将存储变量从非零更改为非零只需花费5,000 gas。</p>
+<h4 id="2-缓存存储变量：仅写入和读取存储变量一次"><a href="#2-缓存存储变量：仅写入和读取存储变量一次" class="headerlink" title="2. 缓存存储变量：仅写入和读取存储变量一次"></a>2. 缓存存储变量：仅写入和读取存储变量一次</h4><p>在高效的 Solidity 代码中，你经常会看到以下模式。从存储变量读取至少需要2,100 gas，写入 20,000gas（新写） &#x2F; 2,900（改为非零） &#x2F; 100（改为零），因为 Solidity 不会缓存存储读取。写入要昂贵得多。因此，你应该手动缓存变量，以便仅进行一次存储读取和一次存储写入。比如下面的这两个合约，前者的函数读取了两次计数器，而后者只读取了一次。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity 0.8.20;</span><br><span class="line"></span><br><span class="line">contract Counter1 &#123;</span><br><span class="line">    uint256 public number;</span><br><span class="line"></span><br><span class="line">    function increment() public &#123;</span><br><span class="line">        require(number &lt; 10);</span><br><span class="line">        number = number + 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 区别: 一个是直接读取全局变量对全局变量进行赋值，一个是通过定义一个局部变量对全局变量进行赋值。后者调用完函数即释放内存（节省gas）</span><br><span class="line">contract Counter2 &#123;</span><br><span class="line">    uint256 public number;</span><br><span class="line"></span><br><span class="line">    function increment() public &#123;</span><br><span class="line">        uint256 _number = number;</span><br><span class="line">        require(_number &lt; 10);</span><br><span class="line">        number = _number + 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-打包相关变量"><a href="#3-打包相关变量" class="headerlink" title="3. 打包相关变量"></a>3. 打包相关变量</h4><p>将相关变量打包到同一个槽位中可以通过最小化昂贵的存储相关操作来减少 gas 成本。</p>
+<h5 id="手动打包是最高效的"><a href="#手动打包是最高效的" class="headerlink" title="手动打包是最高效的"></a><strong>手动打包是最高效的</strong></h5><p>我们通过位移操作将两个 uint80 值存储在一个变量（uint160）中。这样只使用一个存储槽位，在单个事务中存储或读取各个值时更便宜。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity 0.8.20;</span><br><span class="line"></span><br><span class="line">contract GasSavingExample &#123;</span><br><span class="line">    uint160 public packedVariables;</span><br><span class="line"></span><br><span class="line">    function packVariables(uint80 x, uint80 y) external &#123;</span><br><span class="line">        packedVariables = uint160(x) &lt;&lt; 80 | uint160(y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function unpackVariables() external view returns (uint80, uint80) &#123;</span><br><span class="line">        uint80 x = uint80(packedVariables &gt;&gt; 80);</span><br><span class="line">        uint80 y = uint80(packedVariables);</span><br><span class="line">        return (x, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="EVM-打包略微低效"><a href="#EVM-打包略微低效" class="headerlink" title="EVM 打包略微低效"></a><strong>EVM 打包略微低效</strong></h5><p>这个示例与上面的示例一样使用了一个槽位，但在单个事务中存储或读取值时可能稍微昂贵。 这是因为 EVM 会自行进行位移操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">contract GasSavingExample2 &#123;</span><br><span class="line">    uint80 public var1;</span><br><span class="line">    uint80 public var2;</span><br><span class="line"></span><br><span class="line">    function updateVars(uint80 x, uint80 y) external &#123;</span><br><span class="line">        var1 = x;</span><br><span class="line">        var2 = y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function loadVars() external view returns (uint80, uint80) &#123;</span><br><span class="line">        return (var1, var2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="不打包是最低效的"><a href="#不打包是最低效的" class="headerlink" title="不打包是最低效的"></a><strong>不打包是最低效的</strong></h5><p>这种方式没有使用任何优化，在存储或读取值时更昂贵。</p>
+<p>与其它示例不同，这里使用了两个存储槽位来存储变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">contract NonGasSavingExample &#123;</span><br><span class="line">    uint256 public var1;</span><br><span class="line">    uint256 public var2;</span><br><span class="line"></span><br><span class="line">    function updateVars(uint256 x, uint256 y) external &#123;</span><br><span class="line">        var1 = x;</span><br><span class="line">        var2 = y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function loadVars() external view returns (uint256, uint256) &#123;</span><br><span class="line">        return (var1, var2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-打包结构体"><a href="#4-打包结构体" class="headerlink" title="4. 打包结构体"></a>4. 打包结构体</h4><p>像打包相关状态变量一样，打包结构体成员可以帮助节省 gas 。（需要注意的是，在 Solidity 中，结构体成员按顺序存储在合约的存储中，从它们初始化的槽位位置开始）。</p>
+<p>考虑以下示例：</p>
+<h5 id="未打包的结构体"><a href="#未打包的结构体" class="headerlink" title="未打包的结构体"></a><strong>未打包的结构体</strong></h5><p>未打包的结构体 unpackedStruct 有三个成员，它们将存储在三个单独的槽位中。然而，如果这些成员被打包，只会使用两个槽位，这将使读取和写入结构体成员更便宜。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity 0.8.20;</span><br><span class="line"></span><br><span class="line">contract Unpacked_Struct &#123;</span><br><span class="line">    struct unpackedStruct &#123;</span><br><span class="line">        uint64 time; // Takes one slot - although it  only uses 64 bits (8 bytes) out of 256 bits (32 bytes).</span><br><span class="line">        uint256 money; // This will take a new slot because it is a complete 256 bits (32 bytes) value and thus cannot be packed with the previous value.</span><br><span class="line">        address person; // An address occupies only 160 bits (20 bytes).</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Starts at slot 0</span><br><span class="line">    unpackedStruct details = unpackedStruct(53_000, 21_000, address(0xdeadbeef));</span><br><span class="line"></span><br><span class="line">    function unpack() external view returns (unpackedStruct memory) &#123;</span><br><span class="line">        return details;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="打包的结构体"><a href="#打包的结构体" class="headerlink" title="打包的结构体"></a><strong>打包的结构体</strong></h5><p>我们可以通过打包结构体成员来减少上面示例的 gas 消耗，如下所示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">contract Packed_Struct &#123;</span><br><span class="line">    struct packedStruct &#123;</span><br><span class="line">        uint64 time; // In this case, both `time` (64 bits) and `person` (160 bits) are packed in the same slot since they can both fit into 256 bits (32 bytes)</span><br><span class="line">        address person; // Same slot as `time`. Together they occupy 224 bits (28 bytes) out of 256 bits (32 bytes).</span><br><span class="line">        uint256 money; // This will take a new slot because it is a complete 256 bits (32 bytes) value and thus cannot be packed with the previous value.</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // Starts at slot 0</span><br><span class="line">    packedStruct details = packedStruct(53_000, address(0xdeadbeef), 21_000);</span><br><span class="line"></span><br><span class="line">    function unpack() external view returns (packedStruct memory) &#123;</span><br><span class="line">        return details;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-保持字符串长度小于32字节"><a href="#5-保持字符串长度小于32字节" class="headerlink" title="5. 保持字符串长度小于32字节"></a>5. 保持字符串长度小于32字节</h4><p>在 Solidity 中，字符串是可变长度的动态数据类型，意味着它们的长度可以根据需要进行更改和增长。</p>
+<p>如果长度为32字节或更长，它们定义的槽位中存储的是字符串长度 * 2 + 1，而实际数据存储在其它位置（该槽位的 keccak 哈希值）。</p>
+<p>然而，如果字符串长度小于32字节，长度 * 2 存储在其存储槽位的最低有效字节中，并且字符串的实际数据从定义它的槽位的最高有效字节开始存储。</p>
+<h4 id="6-从不更新的变量应为不可变的或常量"><a href="#6-从不更新的变量应为不可变的或常量" class="headerlink" title="6. 从不更新的变量应为不可变的或常量"></a>6. 从不更新的变量应为不可变的或常量</h4><p>在 Solidity 中，不打算更新的变量应该是常量或不可变的。</p>
+<p>这是因为常量和不可变值直接嵌入到它们所定义的合约的字节码中，不使用存储空间。</p>
+<p>这样可以节省大量的 gas，因为我们不进行任何昂贵的存储读取操作。</p>
+<h4 id="7-使用映射而不是数组以避免长度检查"><a href="#7-使用映射而不是数组以避免长度检查" class="headerlink" title="7. 使用映射而不是数组以避免长度检查"></a>7. 使用映射而不是数组以避免长度检查</h4><p>当存储你希望按特定顺序组织并使用固定键&#x2F;索引检索的项目列表或组时，通常使用数组数据结构是常见的做法。这种方法很有效，但你知道可以实现一个技巧，每次读取时可以节省2000多个 gas 吗？</p>
+<p>请参考下面的示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/// get(0) gas cost: 4860 </span><br><span class="line">contract Array &#123;</span><br><span class="line">    uint256[] a;</span><br><span class="line"></span><br><span class="line">    constructor() &#123;</span><br><span class="line">        a.push() = 1;</span><br><span class="line">        a.push() = 2;</span><br><span class="line">        a.push() = 3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function get(uint256 index) external view returns(uint256) &#123;</span><br><span class="line">        return a[index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// get(0) gas cost: 2758</span><br><span class="line">contract Mapping &#123;</span><br><span class="line">    mapping(uint256 =&gt; uint256) a;</span><br><span class="line"></span><br><span class="line">    constructor() &#123;</span><br><span class="line">        a[0] = 1;</span><br><span class="line">        a[1] = 2;</span><br><span class="line">        a[2] = 3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function get(uint256 index) external view returns(uint256) &#123;</span><br><span class="line">        return a[index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>仅仅通过使用映射，我们就可以节省2102个 gas。为什么？在底层，当你读取数组的索引值时，Solidity 会添加字节码来检查你是否正在读取有效的索引（即索引严格小于数组的长度），否则会回滚并显示恐慌错误（具体为 Panic(0x32)）。这样可以防止读取未分配或更糟糕的已分配存储&#x2F;内存位置。</p>
+<p>由于映射的方式是（简单的键&#x3D;&gt;值对），不需要进行这样的检查，我们可以直接从存储槽中读取。重要的是要注意，当以这种方式使用映射时，你的代码应确保不要读取超出规范数组索引的位置。</p>
+<h4 id="8-使用-unsafeAccess-在数组上避免冗余的长度检查"><a href="#8-使用-unsafeAccess-在数组上避免冗余的长度检查" class="headerlink" title="8. 使用 unsafeAccess 在数组上避免冗余的长度检查"></a>8. 使用 unsafeAccess 在数组上避免冗余的长度检查</h4><p>使用映射来避免 Solidity 在读取数组时进行的长度检查（同时仍然使用数组）的另一种方法是使用 Openzeppelin 的 <code>Arrays.sol</code>库中的 <code>unsafeAccess</code> 函数。这使开发人员可以直接访问数组中任意给定索引的值，同时跳过长度溢出检查。但是，仅在确保传递给函数的索引不会超过传递的数组的长度时才使用此方法。</p>
+<h4 id="9-在使用大量布尔值时，使用位图而不是布尔值"><a href="#9-在使用大量布尔值时，使用位图而不是布尔值" class="headerlink" title="9. 在使用大量布尔值时，使用位图而不是布尔值"></a>9. 在使用大量布尔值时，使用位图而不是布尔值</h4><p>一个常见的模式，特别是在空投中，是在领取空投或 NFT 时将地址标记为“已使用”。</p>
+<p>然而，由于只需要一个位来存储这些信息，而每个存储槽是 256 位，这意味着可以使用一个存储槽存储 256 个标志&#x2F;布尔值。</p>
+<p>Solidity <strong>支持紧凑存储（Storage Packing）</strong>，但只有当多个变量可以打包到同一个存储槽时才有效。即使 <code>bool</code> 变量可以紧凑存储，使用位图仍然可以提供更大的优化空间，特别是在 <strong>大量布尔值</strong> 的情况下。Solidity 在 <code>struct</code> 或 <code>mapping</code> 中 <strong>按 32 字节（256 位）对齐存储变量</strong>。如果多个 <code>bool</code> 或 <code>uint8</code> 变量在同一个 <code>struct</code> 里，编译器会<strong>自动打包</strong>到一个存储槽中，从而提高存储效率。</p>
+<h4 id="示例：bool-变量的紧凑存储"><a href="#示例：bool-变量的紧凑存储" class="headerlink" title="示例：bool 变量的紧凑存储"></a><strong>示例：bool 变量的紧凑存储</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">solidity复制编辑pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract PackedStorage &#123;</span><br><span class="line">    struct UserData &#123;</span><br><span class="line">        bool isRegistered;  // 1 bit</span><br><span class="line">        bool hasClaimed;    // 1 bit</span><br><span class="line">        uint8 age;          // 8 bits</span><br><span class="line">        uint16 score;       // 16 bits</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    mapping(address =&gt; UserData) public users;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个 <code>UserData</code> 结构体中：</p>
+<ul>
+<li><code>isRegistered</code> <strong>占 1 bit</strong></li>
+<li><code>hasClaimed</code> <strong>占 1 bit</strong></li>
+<li><code>age</code> <strong>占 8 bits</strong></li>
+<li><code>score</code> <strong>占 16 bits</strong></li>
+<li>这些字段会被<strong>自动打包到一个 32 字节的存储槽</strong>，而不会浪费 32 字节存储槽。</li>
+</ul>
+<h4 id="紧凑存储的限制"><a href="#紧凑存储的限制" class="headerlink" title="紧凑存储的限制"></a><strong>紧凑存储的限制</strong></h4><ol>
+<li><strong>不同类型的变量不能自动打包</strong><ul>
+<li>例如 <code>bool</code> 和 <code>uint256</code> 不能共享同一个存储槽，<code>uint256</code> 仍然会占用完整的 32 字节。</li>
+</ul>
+</li>
+<li><strong>单个 <code>bool</code> 仍然浪费 32 字节</strong><ul>
+<li>如果 <code>mapping(address =&gt; bool)</code>, 每个 <code>bool</code> 仍然占 <strong>一个完整的存储槽</strong>（256 bits）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="为什么仍然推荐位图？"><a href="#为什么仍然推荐位图？" class="headerlink" title="为什么仍然推荐位图？"></a><strong>为什么仍然推荐位图？</strong></h4><p>即使 Solidity 支持紧凑存储，<strong>位图（BitMap）仍然更高效</strong>，因为：</p>
+<ul>
+<li><strong>紧凑存储仍然无法避免 <code>bool</code> 在 <code>mapping</code> 里的高开销</strong>。</li>
+<li><strong>位图可以存 256 个布尔值在一个 <code>uint256</code> 变量里</strong>，更节省存储。</li>
+<li><strong>Gas 成本更低</strong>，减少 <code>SSTORE</code> 操作次数（每次 <code>SSTORE</code> 操作都很昂贵）。</li>
+</ul>
+<h4 id="位图-vs-紧凑存储"><a href="#位图-vs-紧凑存储" class="headerlink" title="位图 vs 紧凑存储"></a><strong>位图 vs 紧凑存储</strong></h4><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>存储槽利用率</th>
+<th>读取 Gas</th>
+<th>写入 Gas</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mapping(address =&gt; bool)</code></td>
+<td>1&#x2F;256</td>
+<td>低</td>
+<td>高</td>
+<td>小量布尔值</td>
+</tr>
+<tr>
+<td><code>struct</code> + 紧凑存储</td>
+<td>高</td>
+<td>低</td>
+<td>低</td>
+<td><code>struct</code> 内小量布尔值</td>
+</tr>
+<tr>
+<td><code>mapping(address =&gt; uint256)</code> (位图)</td>
+<td><strong>100%</strong></td>
+<td>低</td>
+<td>低</td>
+<td><strong>大量布尔值</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="位图的实际应用"><a href="#位图的实际应用" class="headerlink" title="位图的实际应用"></a>位图的实际应用</h4><p>对于像 <strong>空投领取、DAO 投票、NFT 领取</strong> 这样的情况，位图比 <code>bool</code> <strong>更节省 Gas</strong>。</p>
+<h4 id="示例：使用-mapping-address-uint256-作为位图"><a href="#示例：使用-mapping-address-uint256-作为位图" class="headerlink" title="示例：使用 mapping(address =&gt; uint256) 作为位图"></a>示例：使用 <code>mapping(address =&gt; uint256)</code> 作为位图</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">solidity复制编辑pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract AirdropBitmap &#123;</span><br><span class="line">    mapping(address =&gt; uint256) private claimedBitMap;</span><br><span class="line"></span><br><span class="line">    function isClaimed(address user, uint8 index) public view returns (bool) &#123;</span><br><span class="line">        return (claimedBitMap[user] &amp; (1 &lt;&lt; index)) != 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function claim(address user, uint8 index) external &#123;</span><br><span class="line">        require(index &lt; 256, &quot;Index out of bounds&quot;);</span><br><span class="line">        require(!isClaimed(user, index), &quot;Already claimed&quot;);</span><br><span class="line"></span><br><span class="line">        claimedBitMap[user] |= (1 &lt;&lt; index);  // 设置索引位置为 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li><strong>少量布尔值（&lt;8 个）</strong>：紧凑存储（<code>struct</code>）是合理的。</li>
+<li><strong>大量布尔值（&gt;256 个）</strong>：位图 <strong>显著节省存储和 Gas</strong>。</li>
+<li><strong>如果 <code>SimpleDEX</code> 使用 <code>mapping(address =&gt; bool)</code> 来存储状态，可以用位图优化 Gas 成本！</strong></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">zhaojx</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">http://example.com/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">小阿修的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92/" title="Web实习计划（一）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Web实习计划（一）</div></div><div class="info-2"><div class="info-item-1">Web实习计划（一）1.12区块链的概念区块链是一种按某种顺序将数据区块以hash指针相连的方式组合而成的链式数据结构，并以密码学、共识算法方式保证其不可篡改和不可伪造。 (工信部定义) 区块链是一种去中心化的分布式账本技术，用于在网络节点之间安全、透明且不可篡改地记录事务数据。每条链由一系列按照时间顺序相连的“区块”组成，每个区块内部包含了多笔交易数据及元数据，确保了数据记录的完整性与可追溯性。 区块链的特点：&#x3D;&#x3D;公开透明、难以篡改、全程追溯、去中心化&#x3D;&#x3D;  公开透明： 任何用户通过运行比特币或者以太坊的全节点客户端都能下载完整的账本数据并查看上述交易及账 户信息。  难以篡改：  区块链系统中的链式数据结构，是由包含交易信息的区块按照时间顺序从先到后链接起来的，...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/01/19/Chainlink%20%E4%BB%B7%E6%A0%BC%E9%A2%84%E8%A8%80%E6%9C%BA/" title="Chainlink 价格预言机"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-19</div><div class="info-item-2">Chainlink 价格预言机</div></div><div class="info-2"><div class="info-item-1">Chainlink...</div></div></div></a><a class="pagination-related" href="/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92/" title="Web实习计划（一）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-16</div><div class="info-item-2">Web实习计划（一）</div></div><div class="info-2"><div class="info-item-1">Web实习计划（一）1.12区块链的概念区块链是一种按某种顺序将数据区块以hash指针相连的方式组合而成的链式数据结构，并以密码学、共识算法方式保证其不可篡改和不可伪造。 (工信部定义) 区块链是一种去中心化的分布式账本技术，用于在网络节点之间安全、透明且不可篡改地记录事务数据。每条链由一系列按照时间顺序相连的“区块”组成，每个区块内部包含了多笔交易数据及元数据，确保了数据记录的完整性与可追溯性。 区块链的特点：&#x3D;&#x3D;公开透明、难以篡改、全程追溯、去中心化&#x3D;&#x3D;  公开透明： 任何用户通过运行比特币或者以太坊的全节点客户端都能下载完整的账本数据并查看上述交易及账 户信息。  难以篡改：  区块链系统中的链式数据结构，是由包含交易信息的区块按照时间顺序从先到后链接起来的，...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zhaojx</div><div class="author-info-description">寻常朝暮，只身留我一人南渡.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:zhaojinxiu6@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">Web实习计划（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-16"><span class="toc-number">1.1.</span> <span class="toc-text">1.16</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17"><span class="toc-number">1.2.</span> <span class="toc-text">1.17</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据存储</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-18"><span class="toc-number">1.3.</span> <span class="toc-text">1.18</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ABI%E7%BC%96%E8%A7%A3%E7%A0%81%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">ABI编解码函数：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%EF%BC%9Aabi-encode-string-concat-%E5%92%8C-abi-encodePacked-%E8%BF%99%E4%B8%89%E8%80%85%E5%9C%A8-Solidity-%E4%B8%AD%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BD%9C%E7%94%A8%E6%98%AF%E6%95%B0%E6%8D%AE%E7%BC%96%E7%A0%81%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%EF%BC%8C%E4%BD%86%E5%AE%83%E4%BB%AC%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%92%8C%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E6%9C%89%E6%89%80%E4%B8%8D%E5%90%8C%EF%BC%9A"><span class="toc-number">1.3.1.0.1.</span> <span class="toc-text">拓展：abi.encode(), string.concat(), 和 abi.encodePacked() 这三者在 Solidity 中的主要作用是数据编码和字符串拼接，但它们的行为和适用场景有所不同：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.1.0.2.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%EF%BC%9F"><span class="toc-number">1.3.1.0.3.</span> <span class="toc-text">什么时候用？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-19"><span class="toc-number">1.4.</span> <span class="toc-text">1.19</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-20"><span class="toc-number">1.5.</span> <span class="toc-text">1.20</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-21"><span class="toc-number">1.6.</span> <span class="toc-text">1.21</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-22"><span class="toc-number">1.7.</span> <span class="toc-text">1.22</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-23"><span class="toc-number">1.8.</span> <span class="toc-text">1.23</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-24"><span class="toc-number">1.9.</span> <span class="toc-text">1.24</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gas-%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7"><span class="toc-number">1.9.1.</span> <span class="toc-text">gas 优化技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%98%AF%EF%BC%9A%E5%B0%BD%E5%8F%AF%E8%83%BD%E9%81%BF%E5%85%8D%E9%9B%B6%E5%88%B0%E4%B8%80%E7%9A%84%E5%AD%98%E5%82%A8%E5%86%99%E5%85%A5"><span class="toc-number">1.9.1.1.</span> <span class="toc-text">1. 最重要的是：尽可能避免零到一的存储写入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BC%93%E5%AD%98%E5%AD%98%E5%82%A8%E5%8F%98%E9%87%8F%EF%BC%9A%E4%BB%85%E5%86%99%E5%85%A5%E5%92%8C%E8%AF%BB%E5%8F%96%E5%AD%98%E5%82%A8%E5%8F%98%E9%87%8F%E4%B8%80%E6%AC%A1"><span class="toc-number">1.9.1.2.</span> <span class="toc-text">2. 缓存存储变量：仅写入和读取存储变量一次</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%89%93%E5%8C%85%E7%9B%B8%E5%85%B3%E5%8F%98%E9%87%8F"><span class="toc-number">1.9.1.3.</span> <span class="toc-text">3. 打包相关变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%89%93%E5%8C%85%E6%98%AF%E6%9C%80%E9%AB%98%E6%95%88%E7%9A%84"><span class="toc-number">1.9.1.3.1.</span> <span class="toc-text">手动打包是最高效的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#EVM-%E6%89%93%E5%8C%85%E7%95%A5%E5%BE%AE%E4%BD%8E%E6%95%88"><span class="toc-number">1.9.1.3.2.</span> <span class="toc-text">EVM 打包略微低效</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E6%89%93%E5%8C%85%E6%98%AF%E6%9C%80%E4%BD%8E%E6%95%88%E7%9A%84"><span class="toc-number">1.9.1.3.3.</span> <span class="toc-text">不打包是最低效的</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%89%93%E5%8C%85%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.9.1.4.</span> <span class="toc-text">4. 打包结构体</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.9.1.4.1.</span> <span class="toc-text">未打包的结构体</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.9.1.4.2.</span> <span class="toc-text">打包的结构体</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E4%BF%9D%E6%8C%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E5%B0%8F%E4%BA%8E32%E5%AD%97%E8%8A%82"><span class="toc-number">1.9.1.5.</span> <span class="toc-text">5. 保持字符串长度小于32字节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E4%BB%8E%E4%B8%8D%E6%9B%B4%E6%96%B0%E7%9A%84%E5%8F%98%E9%87%8F%E5%BA%94%E4%B8%BA%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84%E6%88%96%E5%B8%B8%E9%87%8F"><span class="toc-number">1.9.1.6.</span> <span class="toc-text">6. 从不更新的变量应为不可变的或常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E4%BD%BF%E7%94%A8%E6%98%A0%E5%B0%84%E8%80%8C%E4%B8%8D%E6%98%AF%E6%95%B0%E7%BB%84%E4%BB%A5%E9%81%BF%E5%85%8D%E9%95%BF%E5%BA%A6%E6%A3%80%E6%9F%A5"><span class="toc-number">1.9.1.7.</span> <span class="toc-text">7. 使用映射而不是数组以避免长度检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E4%BD%BF%E7%94%A8-unsafeAccess-%E5%9C%A8%E6%95%B0%E7%BB%84%E4%B8%8A%E9%81%BF%E5%85%8D%E5%86%97%E4%BD%99%E7%9A%84%E9%95%BF%E5%BA%A6%E6%A3%80%E6%9F%A5"><span class="toc-number">1.9.1.8.</span> <span class="toc-text">8. 使用 unsafeAccess 在数组上避免冗余的长度检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-%E5%9C%A8%E4%BD%BF%E7%94%A8%E5%A4%A7%E9%87%8F%E5%B8%83%E5%B0%94%E5%80%BC%E6%97%B6%EF%BC%8C%E4%BD%BF%E7%94%A8%E4%BD%8D%E5%9B%BE%E8%80%8C%E4%B8%8D%E6%98%AF%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-number">1.9.1.9.</span> <span class="toc-text">9. 在使用大量布尔值时，使用位图而不是布尔值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9Abool-%E5%8F%98%E9%87%8F%E7%9A%84%E7%B4%A7%E5%87%91%E5%AD%98%E5%82%A8"><span class="toc-number">1.9.1.10.</span> <span class="toc-text">示例：bool 变量的紧凑存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A7%E5%87%91%E5%AD%98%E5%82%A8%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-number">1.9.1.11.</span> <span class="toc-text">紧凑存储的限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E7%84%B6%E6%8E%A8%E8%8D%90%E4%BD%8D%E5%9B%BE%EF%BC%9F"><span class="toc-number">1.9.1.12.</span> <span class="toc-text">为什么仍然推荐位图？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8D%E5%9B%BE-vs-%E7%B4%A7%E5%87%91%E5%AD%98%E5%82%A8"><span class="toc-number">1.9.1.13.</span> <span class="toc-text">位图 vs 紧凑存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8D%E5%9B%BE%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">1.9.1.14.</span> <span class="toc-text">位图的实际应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8-mapping-address-uint256-%E4%BD%9C%E4%B8%BA%E4%BD%8D%E5%9B%BE"><span class="toc-number">1.9.1.15.</span> <span class="toc-text">示例：使用 mapping(address &#x3D;&gt; uint256) 作为位图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">1.9.1.16.</span> <span class="toc-text">结论</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92/" title="Web实习计划（一）">Web实习计划（一）</a><time datetime="2026-01-16T14:00:37.000Z" title="发表于 2026-01-16 22:00:37">2026-01-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Web实习计划（二）">Web实习计划（二）</a><time datetime="2026-01-16T14:00:37.000Z" title="发表于 2026-01-16 22:00:37">2026-01-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/DLNU25ctfwp/" title="DLNU25ctf考核wp">DLNU25ctf考核wp</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/R3CTF/" title="R3CTF_blockchain">R3CTF_blockchain</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/Chainlink%20%E4%BB%B7%E6%A0%BC%E9%A2%84%E8%A8%80%E6%9C%BA/" title="Chainlink 价格预言机">Chainlink 价格预言机</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/background3.jpg);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2026 By zhaojx</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2520739691" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><script defer src="/js/denglong.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
