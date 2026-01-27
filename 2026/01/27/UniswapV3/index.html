@@ -1,0 +1,789 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>UniswapV3 | 小阿修的博客</title><meta name="author" content="zhaojx"><meta name="copyright" content="zhaojx"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="UniswapV3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UniswapV3">
+<meta property="og:url" content="http://example.com/2026/01/27/UniswapV3/index.html">
+<meta property="og:site_name" content="小阿修的博客">
+<meta property="og:description" content="UniswapV3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2026-01-27T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-27T12:36:01.589Z">
+<meta property="article:author" content="zhaojx">
+<meta property="article:tag" content="DeFi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "UniswapV3",
+  "url": "http://example.com/2026/01/27/UniswapV3/",
+  "image": "http://example.com/img/avatar.jpg",
+  "datePublished": "2026-01-27T12:00:00.000Z",
+  "dateModified": "2026-01-27T12:36:01.589Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zhaojx",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/%5Bobject%20Object%5D"><link rel="canonical" href="http://example.com/2026/01/27/UniswapV3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'UniswapV3',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/background2.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/background3.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" alt="Logo"><span class="site-name">小阿修的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">UniswapV3</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">UniswapV3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-27T12:00:00.000Z" title="发表于 2026-01-27 20:00:00">2026-01-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-27T12:36:01.589Z" title="更新于 2026-01-27 20:36:01">2026-01-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Uniswap/">Uniswap</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">11.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>39分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Uniswap-V3"><a href="#Uniswap-V3" class="headerlink" title="Uniswap V3"></a>Uniswap V3</h1><p>通过AMM进行代币交换时，预期价格和实际交易价格之间必然产生滑点（Slippage）。并且当池中的流动性不足且交易量大的时候，滑点会加大，滑点越大交易者就不得不以更高价格来交易代币。为了在一定程度解决滑点问题，出现了变化流动性区间——使得Uniswap V3成为设计最灵活、最高效的AMM（自动做市商）。流动性提供者（Liquidity Providers）可以根据需要自行定义该区间范围，设定这个范围意味着供给的代币仅能在“特定价格范围”内进行交换，并将资金集中在某个价格区间内，滑点更下，极大提高资本效率，提升了交易深度和收益率。</p>
+<h3 id="集中流动性"><a href="#集中流动性" class="headerlink" title="集中流动性"></a>集中流动性</h3><p><strong>流动性供给限定在特定价格范围内被称为集中流动性（Concentrated Liquidity）</strong>。通过这种方式可以避免供给者承担未用于交换的流动性，从而实现更高效的流动性供给。流动池里面的资金在特定的价格范围内都将被利用。</p>
+<h4 id="准时流动性（JIT-Liquidity）"><a href="#准时流动性（JIT-Liquidity）" class="headerlink" title="准时流动性（JIT Liquidity）"></a>准时流动性（JIT Liquidity）</h4><p><strong>准时流动性（JIT Liquidity）</strong> 是指流动性提供者（LP）<strong>在某一笔交易执行前瞬间加入流动性，然后立即在交易之后移除流动性，从而捕获费用收益</strong>的一种策略。</p>
+<p>这是一种链上可编程交易的行为，通常借助 <strong>MEV（矿工可提取价值）策略</strong> 实现。</p>
+<p>JIT 流动性利用这一点进行以下操作：</p>
+<ol>
+<li>某个交易者（Taker）准备进行一笔大额交易（如从 ETH → USDC）。</li>
+<li>MEV 机器人或 LP 监测到这笔交易会导致价格进入某一特定范围。</li>
+<li>在这笔交易被打包前，<strong>机器人向该价格区间注入精确的流动性</strong>（例如只在 ETH&#x2F;USDC 的某个价格区间）。</li>
+<li>交易发生，JIT 流动性被使用 → <strong>机器人获得手续费</strong>。</li>
+<li>机器人立即移除流动性，并取回原始资产 + 所得手续费。</li>
+<li>一般情况下，不承担资产波动风险。</li>
+</ol>
+<p>JIT流动性的目的：</p>
+<ul>
+<li>捕获手续费</li>
+<li>实现“无风险套利”</li>
+<li>为大交易提供临时深度，提高成交效率</li>
+</ul>
+<p>&#x3D;&#x3D;潜在问题与争议&#x3D;&#x3D;</p>
+<h5 id="对长期-LP-不公平"><a href="#对长期-LP-不公平" class="headerlink" title="对长期 LP 不公平"></a>对长期 LP 不公平</h5><ul>
+<li>长期 LP 承担价格波动和无常损失（impermanent loss）</li>
+<li>JIT LP 只在精准时间加入并立即退出，<strong>“白嫖”手续费</strong></li>
+</ul>
+<h5 id="引发治理和设计讨论"><a href="#引发治理和设计讨论" class="headerlink" title="引发治理和设计讨论"></a>引发治理和设计讨论</h5><ul>
+<li>是否应该对 LP 收益做时间加权？</li>
+<li>是否需要引入 “minimum lock time” 或 “delayed fee accrual”等机制防止 JIT 利用？</li>
+</ul>
+<h5 id="对用户交易有一定好处"><a href="#对用户交易有一定好处" class="headerlink" title="对用户交易有一定好处"></a>对用户交易有一定好处</h5><ul>
+<li>可以提高交易深度，减少滑点</li>
+<li>有时可帮助大交易者获得更优的成交价格</li>
+</ul>
+<h4 id="流动性净变动（Liquidity-Net）"><a href="#流动性净变动（Liquidity-Net）" class="headerlink" title="流动性净变动（Liquidity Net）"></a>流动性净变动（Liquidity Net）</h4><p>Liquidity Net（流动性净变动）表示：当价格发生变化时，它最终会跨越一个 tick，而在跨越这个 tick 时，会在当前流动性上加上或减去某个数值，这个数值就是所谓的 Liquidity Net。</p>
+<p>未用于交换的流动性被称为懒惰流动性（Lazy Liquidity）</p>
+<p>高效的流动性供给结果被称为高资本效率（Higher Capital Efficiency）</p>
+<p>在V3，由于直接兑换的流动性不足，兑换可能被路由到多个交易对。路由的交易对越多，交易者将支付更多的费用，滑点也随之提高。</p>
+<p>相对于V2的创新点：</p>
+<ul>
+<li>相对于Uniswap v2，LP可以<strong>提高4000倍的资本效率</strong>提供流动性，以获得<strong>更高的资本回报</strong>。</li>
+<li>资本效率为低滑点的<strong>交易执行铺平了道路，可以超越中心化交易所和专注于稳定币的AMM</strong>。</li>
+<li>LP可以显著<strong>增加对优先资产的敞口</strong>，并<strong>降低其下行风险</strong>。</li>
+<li>LP可以通过在完全高于或低于市场价格的价格区间内增加流动性，类似于<strong>沿平滑曲线执行的收费限价单来卖出另一种资产</strong>。Uniswap V3只需一种代币也可以提供流动性，还可以构建价格范围限价单（Range Limit Orders）</li>
+<li>V3预言机可以更简单和更低成本的集成。它可以根据需求提供过去约9天内任何时期的时间加权平均价格（TWAP）。这样集成项目就不需要检查历史价格值。</li>
+</ul>
+<p>通过这些设计，在以太坊主网上使用V3兑换的Gas成本比V2略低。但是在Optimism部署上进行的交易将可能更大程度地便宜。</p>
+<p>V2只有在贸易规模极大（x*y &#x3D; K ，K 总流动性的恒定值很大）的时候，价格影响才不明显。而V3很好的解决了在没有高资本需求的情况下实现高流动性并且提高了资本效率。</p>
+<p>所以引入了集中流动性，即LP可以根据预期价格在特定范围内调整汇率。旨在最大程度的减少汇率波动以及减少所需的储备量。如果市场价格在LP指定的价格区间之外变动，其流动性就会被有效地从资金池中移除，不在赚取费用。在这种状态下，LP的流动性完全由两种资产价值较低的一种组成，直到市场价格回到他们指定的价格区间，或者他们考虑到当前的价格，更新价格区间。再一个就是由于流动性可以都集中在攻击者的目标价格之间的区间，那么攻击者需要动用更多的资金才能达到相同的目的。从这个角度来看，攻击者进行经济攻击的难度增大了。当然，攻击者还是可能通过闪电贷等方式获得足够的资金来完成攻击。</p>
+<p>LP只有市场在其指定的价格区间内交易才会赚取费用。</p>
+<p>V2的缺点：</p>
+<ul>
+<li>首先就是，交易时会发生滑点导致未能以预期价格购入或卖出。除非流动池里面的资金规模极大，市场行为无法扰动流动池的平衡（理论上可行，实际上无法实现：LP投入高，获利少甚至无利可循，因为还有无偿损失，有很高的价格风险）。</li>
+<li>其次就是资金利用率不高，因为V2维持的汇率是从0到$\Large∞$，而市场上的交易价格始终会维持在一定区间内。在这个价格区间内，LP预期可以看到最多的交易量，从而赚取最多的费用。相比之下，V3维持这个价格区间所需要的资金要远少于V2。</li>
+<li>最后，恒定价格公式简单，市场获利窗口少，面对小股资金的流入和流出，吸引力小。</li>
+</ul>
+<p>更高的流动性（Higher Liquidity） ⇒ 更小的价格影响（Less Price Impact） ⇒ 更多交易者（More Traders）</p>
+<p>Uniswap V3 可以利用较少的资金构建出一个更“宽大的”恒定乘积曲线，使得流动性都集中作用在这个价格区间内。</p>
+<p>在这个价格区间内实际用到的资金被称为<strong>真实储备（Real Reserves）</strong>，即该价格区间内真正需要的代币数量。而为了构建相同的曲线，在 Uniswap V2 中需要的代币（远比Uniswap V3 所用的多的多），则被称为<strong>虚拟储备（Virtual Reserves）</strong>，是理论上需要的数量。</p>
+<p>$\Large(x_r + x_v)(y_r + y_v) &#x3D; L^2$</p>
+<p>$\Large(x_r + \frac{L}  {\sqrt{P_b}})  (y_r + L  {\sqrt{P_a}}) &#x3D; L^2$</p>
+<p>在Uniswap V2中，智能合约追踪的是代币X和代币Y的储备量。基于这些储备，我们可以计算出流动性和价格（汇率）。而在Uniswap V3中， 智能合约追踪的是流动性（L）和价格（P），通过这些数据，可以计算在该价格区间内（P<del>A</del>到P<del>B</del>）的X和Y的储备。</p>
+<ul>
+<li>X 的公式为：</li>
+</ul>
+<p>​		$\Large x_v &#x3D; \frac{L^2}{L \cdot \sqrt{P_b}} &#x3D; \frac{L}{\sqrt{P_b}}$</p>
+<p>​		$\Large x &#x3D; \frac{L}{\sqrt{P_a}} - \frac{L}{\sqrt{P_b}}$</p>
+<ul>
+<li><p>Y的公式为：</p>
+<p>​	$\Large y_v &#x3D; \frac{L^2}{L &#x2F; \sqrt{P_a}} &#x3D; L \cdot \sqrt{P_a}$</p>
+<p>​	$\Large y &#x3D; L \cdot (\sqrt{P_b} - \sqrt{P_a})$</p>
+</li>
+</ul>
+<p>这两个公式可以通用。</p>
+<ul>
+<li>对于 token x 的计算，我们是考虑价格从低到高的变化；</li>
+<li>对于 token y 的计算，我们是考虑价格从高到低的变化。</li>
+</ul>
+<p>已知流动性L和价格P，如何计算从当前价格P上升到某一目标价格P<del>b</del>所需要的token x的数量：</p>
+<p>$x &#x3D; \Large\frac{L}{\sqrt{P}} - \Large\frac{L}{\sqrt{P_b}}$</p>
+<p>如何计算从当前价格下降到某一目标价格P<del>a</del>所需的token y的数量：</p>
+<p>$y &#x3D; L \cdot (\sqrt{P} - \sqrt{P_a})$</p>
+<p>如果我们添加或移除一定数量的 token <code>x</code>，价格会变成多少？</p>
+<ul>
+<li><p>添加 $\delta x$ 后新的价格（平方根形式）：</p>
+<p>${\sqrt{P<del>a}} &#x3D; \Large\frac {L \cdot {\sqrt{P</del>b}}}  {L + \delta x \cdot {\sqrt{P~b}}}$</p>
+</li>
+<li><p>移除 $\delta x$ 后新的价格（平方根形式）：</p>
+<p>${\sqrt{P<del>b}} &#x3D; \Large\frac {L \cdot {\sqrt{P</del>a}}}  {L - \delta x \cdot  {\sqrt{P~a}}}$</p>
+</li>
+</ul>
+<p>如果我们添加或移除一定数量的 token <code>y</code>，价格会变成多少？</p>
+<ul>
+<li><p>添加 $\delta y$后新的价格（平方根形式）：</p>
+<p>${\sqrt{P<del>b}} &#x3D; {\sqrt{P</del>a}} + \Large\frac{\delta y} {L} $</p>
+</li>
+<li><p>移除 $\delta y$后新的价格（平方根形式）：</p>
+<p>${\sqrt{P<del>a}} &#x3D; {\sqrt{P</del>b}} - \Large\frac{\delta y}  {L}$</p>
+</li>
+</ul>
+<p>计算流动性：</p>
+<ul>
+<li>当前价格小于P<del>a</del>，所有的流动性都表现为token <code>x</code>，因为当价格从P<del>a</del>升高到P<del>b</del>时，流动池必须释放出相应数量的token <code>x</code>。</li>
+</ul>
+<p>​	  $L = \Large\frac{x}  {\frac{1}  {\sqrt{p_a}} - \frac{1}  {\sqrt{p_b}}}$     </p>
+<p>或者 </p>
+  $L = \Large\frac{x \cdot {\sqrt{p_a}} \cdot{\sqrt{p_b}}}  {{\sqrt{p_b}} - {\sqrt{p_a}}}$    	$\delta L = \Large\frac{\delta x}  {\frac{1}  {\sqrt{p_a}} - \frac{1}  {\sqrt{p_b}}}$
+
+<ul>
+<li><p>当前价格大于P<del>b</del>，所有的流动性都表现为token <code>y</code>，因为当价格从P<del>b</del>下降到P<del>a</del>时，token <code>y</code>必须从池中释放。</p>
+ $L = \Large\frac{y}  {{\sqrt{p_b}} - {\sqrt{p_a}}}$       $\delta L = \Large\frac{\delta y}  {{\sqrt{p_b}} - {\sqrt{p_a}}}$
+</li>
+<li><p>当前价格P<del>a</del>&lt;P&lt;P<del>b</del>，区间 [P, P<del>b</del>] 的流动性部分以 token <code>x</code> 形式存在，而区间 [P<del>a</del>, P] 的流动性部分以 token <code>y</code> 形式存在。这两部分的流动性不一定相等。</p>
+<p>L<del>x</del>表示从当前价格 P 到 P<del>b</del> 范围的流动性（即 token <code>x</code> 部分）</p>
+</li>
+</ul>
+<p>​	$L~x = \Large\frac{x}  {\frac{1}  {\sqrt{pa}} - \frac{1}  {\sqrt{p_b}}}$$\delta L = \Large\frac{\delta y}  {{\sqrt{p_b}} - {\sqrt{p_a}}}$</p>
+<p>​	L<del>y</del>表示从 P<del>a</del> 到当前价格 P范围的流动性（即 token <code>y</code> 部分）</p>
+<p>​	$L~y = \Large\frac{y}  {{\sqrt{p}} - {\sqrt{p_a}}}$</p>
+<p>​	$\delta L = \Large\frac{\delta y}  {{\sqrt{p_b}} - {\sqrt{p_a}}}= \Large\frac{\delta x}  {\frac{1}  {\sqrt{p_a}} - \frac{1}  {\sqrt{p_b}}}$</p>
+<h4 id="流动性管理方式的不同"><a href="#流动性管理方式的不同" class="headerlink" title="流动性管理方式的不同"></a><strong>流动性管理方式的不同</strong></h4><ul>
+<li>在 <strong>V2</strong> 中，流动性管理是<strong>被动的</strong>，用户只需提供代币即可获得手续费收入。流动性通过 ERC20 代币表示。</li>
+<li>在 <strong>V3</strong> 中，流动性管理是<strong>主动的</strong>。用户必须选择一个<strong>价格区间</strong>来添加流动性，只有在当前价格落在该区间内时，才能获得手续费。</li>
+</ul>
+<p>如果价格偏离所设区间，流动性将不再产生费用。此时用户需要重新定位自己的流动性到新的价格区间内。由于每一份流动性的价格范围和提供时间都可能不同，因此无法再用 ERC20 来表示。V3 使用的是 <strong>ERC721（NFT）</strong> 来代表每一份独特的流动性头寸。两者的手续费结构也不同，V2仅支持一种固定手续费：0.3%，而V3支持四种不同的手续费档位：0.01%、0.05%、0.3%、1%  此外Uniswap 的治理机制可以新增更多费率档位。</p>
+<h4 id="TWAP（时间加权平均价格）的计算方式不同"><a href="#TWAP（时间加权平均价格）的计算方式不同" class="headerlink" title="TWAP（时间加权平均价格）的计算方式不同"></a>TWAP（时间加权平均价格）的计算方式不同</h4><ul>
+<li><p>V2 使用算术平均值（Arithmetic Mean）快速响应价格变化，但对极端价格波动较敏感</p>
+</li>
+<li><p>V3使用几何平均值（Geometric Mean）平滑了价格波动，但在价格突变响应有一定的滞后性。</p>
+</li>
+</ul>
+<p>Uniswap V3 的缺点：</p>
+<ul>
+<li>需要主动管理：一旦价格偏离设定区间，就无法继续赚取手续费，LP需要重新部署流动性。</li>
+<li>流动性为NFT（ERC721）：这使得流动性难以转移或组合，也对智能合约继承带来更高的开发复杂度</li>
+</ul>
+<h4 id="区间的宽度对流动性的影响"><a href="#区间的宽度对流动性的影响" class="headerlink" title="区间的宽度对流动性的影响"></a>区间的宽度对流动性的影响</h4><ul>
+<li><strong>区间越窄</strong>（例如 0.999 ~ 1.001），<strong>单位资本提供的流动性越高</strong>，价格滑点越小；</li>
+<li><strong>区间越宽</strong>（例如 0.5 ~ 1.5），流动性被摊薄，每个价格点的可用代币减少，滑点变大；</li>
+<li>如果区间扩大到从 <code>0</code> 到 <code>∞</code>，<strong>Uniswap V3 的流动性曲线会退化成 V2 的那条曲线</strong>。</li>
+</ul>
+<p>Uniswap V3中的现货价格公式：$\Large p &#x3D; 1.0001^t$</p>
+<p>在这个公式中：</p>
+<ul>
+<li><p><code>p</code> 表示当前的现货价格；</p>
+</li>
+<li><p><code>t</code> 表示当前的 tick 值（整数）； t 被称为 <strong>tick index（价格跳动指数）</strong>，Tick index 是 范围[−887272,887272] 内的整数，从而在价格曲线上产生 1,774,545 个价格跳动，从 p(−887272) 到 p(887272)。</p>
+<ul>
+<li>为什么是887272呢？由$p &#x3D; 1.0001^t$公式我们可以推得：$\log_{1.0001}(p) &#x3D; \log_{1.0001}(1.0001^t) &#x3D; t$，而p最大为2^128^，代入可得$t &#x3D; \log_{1.0001}(2^{128}) &#x3D; 887272$</li>
+</ul>
+</li>
+<li><p>智能合约会跟踪当前的 <code>tick（价格跳动）</code>，然后通过该公式计算价格。</p>
+</li>
+</ul>
+<p> Tick 与价格的关系：</p>
+<ul>
+<li>当 <code>tick = 0</code> 时，<code>p = 1</code>，价格等于 1；</li>
+<li>当 <code>tick &lt; 0</code>（负数）时，<code>p &lt; 1</code>，价格小于 1；</li>
+<li>当 <code>tick &gt; 0</code>（正数）时，<code>p &gt; 1</code>，价格大于 1。</li>
+</ul>
+<p>tick 实际上是一个<strong>价格的离散表示</strong>，tick 的每一个单位代表价格变动的一个微小步长。这个 1.0001^t^ 的形式，是为了在<strong>可计算性和精度之间取得平衡</strong>。并不是所有这 177 万个 tick 都能在池中使用，具体哪些 tick 可用取决于<strong>池创建时设置的 tick 间距（tick spacing）</strong>。每个池都定义了一个值叫 <code>tickSpacing</code>，它决定了<strong>允许的两个相邻 tick 索引之间的距离</strong>。当流动性提供者（LP）向 Uniswap V3 池中添加流动性时，需要指定一个价格区间并会设定好变量 <code>tickSpacing</code> 。而且，tick spacing 与手续费费率是<strong>一一对应</strong>的。。这个价格区间是通过一个下限 tick 和一个上限 tick 来定义的。然而，这些 tick 不能是任意的数字，它们必须是 <strong>tick spacing（刻度间隔）</strong> 的整数倍。tick spacing 在不同的池中是不一样的。不再提供流动性。在头寸的范围内，两种代币的流动性都存在，同样的超出这个范围，只有单个代币的流动性。</p>
+<p>选择不同 tick spacing 的原因在于在 <strong>流动性集中度</strong> 与 <strong>gas 消耗</strong> 之间进行权衡以应对不同交易对的波动性。每次在swap中跨越tick会产生gas消耗，所以tick跨越应尽可能少发生。波动性高的交易对，tick spacing应更大，减少tick频繁跨越。，但是也不能过大，否则流动性提供者（LP）无法精确聚焦于他们认为的价格区间 。</p>
+<ul>
+<li><strong>高波动资产对（如 MEME&#x2F;ETH）</strong>：价格跳动大 → tick spacing 应更大；</li>
+<li><strong>稳定资产对（如 USDC&#x2F;USDT）</strong>：价格稳定 → tick spacing 可更小，允许 LP 更精准布流。</li>
+</ul>
+<p> 较小的 tick spacing 意味着可以更精细地集中流动性，但也意味着在交换过程中 gas 消耗更高；而较大的 tick spacing 虽然牺牲了流动性集中度，但可以减少 gas 消耗。tick spacing 越大，每次迭代的步子越大，所需迭代次数就越少，从而 gas 消耗更低。当然，较大的 tick spacing 也有代价，就是流动性集中能力变差。 因为最小的可添加流动性的价格区间会变宽。</p>
+<p>此外，还要考虑流动性提供者遭受无常损失的风险。高度波动的资产往往会导致更高的无常损失，而更稳定的资产往往会导致更低的无常损失。例如，稳定币对几乎没有无常损失的风险，而 meme 代币对则具有极高的风险。因此，LP 将要求更高的费用，以弥补为高度波动的资产提供流动性时产生的无常损失。同样，交易者可以容忍波动性资产的更高费用，因为交易这些资产的潜在回报要高得多。</p>
+<p>这表明交易对波动性、tick 间距和费用之间的关系应如下所示：</p>
+<ul>
+<li>对于具有高无常损失风险的波动性交易对，tick 间距和费用都应较高，而对于具有低无常损失风险的更稳定的交易对，两者都可以较低。</li>
+<li>由用户决定哪些交易对更稳定或更不稳定。</li>
+<li>协议定义的是 tick 间距和费用层级之间的关系。</li>
+</ul>
+<h4 id="Factory-合约中的-TickSpacing-与-Fee-的设置"><a href="#Factory-合约中的-TickSpacing-与-Fee-的设置" class="headerlink" title="Factory 合约中的 TickSpacing 与 Fee 的设置"></a>Factory 合约中的 TickSpacing 与 Fee 的设置</h4><p>该关系记录在 UniswapV3Factory 合约中的一个映射：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mapping(uint24 =&gt; int24) public feeAmountTickSpacing;</span><br><span class="line">function enableFeeAmount(uint24 fee, int24 tickSpacing) external onlyOwner</span><br></pre></td></tr></table></figure>
+
+<p>这个映射表示：<strong>给定 fee 费率，对应的 tickSpacing 是多少</strong>。</p>
+<p>通过函数<code>enableFeeAmount()</code> ，治理可以添加新的费率与 tick spacing映射关系。</p>
+<p>最初的 fee ↔ tickSpacing 是在合约部署时通过构造函数初始化的。例如：</p>
+<table>
+<thead>
+<tr>
+<th align="center">手续费 tier</th>
+<th align="center">basis points</th>
+<th align="center">tick spacing</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0.01%</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">0.05%</td>
+<td align="center">5</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">0.3%</td>
+<td align="center">30</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td align="center">1%</td>
+<td align="center">100</td>
+<td align="center">200</td>
+</tr>
+</tbody></table>
+<h4 id="什么是-basis-points？"><a href="#什么是-basis-points？" class="headerlink" title="什么是 basis points？"></a>什么是 basis points？</h4><ul>
+<li><strong>basis point（基点）</strong>：1 basis point &#x3D; 0.01%；</li>
+<li>所以 5 bp &#x3D; 0.05%，30 bp &#x3D; 0.3%，100 bp &#x3D; 1%。</li>
+</ul>
+<h3 id="使用Factory合约创建新池的流程"><a href="#使用Factory合约创建新池的流程" class="headerlink" title="使用Factory合约创建新池的流程"></a>使用Factory合约创建新池的流程</h3><p>用户创建池时需要提供：</p>
+<ul>
+<li>两个代币的地址</li>
+<li>期望的手续费tier</li>
+</ul>
+<p>然后：</p>
+<ul>
+<li><code>Factory</code>会查<code>feeAmountTickSpacing</code>映射；</li>
+<li>得到tick spacing</li>
+<li>将<code>fee</code>和<code>tickSpacing</code> 一起传入Pool构造函数；</li>
+<li>并作为<code>public immutable</code>存储变量永久保存在池中。</li>
+</ul>
+<h4 id="创建池时无权限的（permissionless）"><a href="#创建池时无权限的（permissionless）" class="headerlink" title="创建池时无权限的（permissionless）"></a>创建池时无权限的（permissionless）</h4><p>任何人都可以调用<code>createPool()</code>函数，只要该token pair + fee 组合尚未存在。因此，可以存在：</p>
+<ul>
+<li>相同token pair （如USDC&#x2F;ETH）</li>
+<li>但不同手续费的多个池（如0.05%、0.3%、1%）</li>
+<li>由市场决定哪个池流动性最好</li>
+</ul>
+<h3 id="tick-bitmap（刻度位图）"><a href="#tick-bitmap（刻度位图）" class="headerlink" title="tick bitmap（刻度位图）"></a><strong>tick bitmap（刻度位图）</strong></h3><p>在 Uniswap V3 中，流动性头寸是通过一个下限 tick 和一个上限 tick 来定义的。这两个 tick 被保存在一个称为 <strong>tick bitmap（刻度位图）</strong> 的映射中。<code>tickBitmap</code> 是一个从 <code>int16</code> 到 <code>uint256</code> 的映射（mapping）。<br> 而一个 tick 是 <code>int24</code> 类型的数字，在 tickBitmap 中会被拆分为两个部分：</p>
+<ol>
+<li><strong>前16位</strong>（从左到右）会被转换为一个 <code>int16</code>，这部分称为 <strong>word position</strong>（字位置）。</li>
+<li><strong>后8位</strong> 会被转换为一个 <code>uint8</code>，称为 <strong>bit position</strong>（位位置）。</li>
+</ol>
+<h3 id="将-tick-存入-tick-bitmap-的过程如下："><a href="#将-tick-存入-tick-bitmap-的过程如下：" class="headerlink" title="将 tick 存入 tick bitmap 的过程如下："></a>将 tick 存入 tick bitmap 的过程如下：</h3><ol>
+<li><p><strong>拆分 tick：</strong> 将 <code>int24</code> 类型的 tick 拆分为 <code>int16</code> 的 word position（字位置） 和 <code>uint8</code> 的 bit position（位位置）。</p>
+</li>
+<li><p><strong>访问 bitmap：</strong> 使用 word position 作为键，从 tick bitmap 映射中获取一个 <code>uint256</code> 类型的值。</p>
+</li>
+<li><p><strong>构造掩码：</strong> 创建一个掩码（mask），这是一个长度为 256 的二进制串，只有某一个位置是 <code>1</code>，其他位置都是 <code>0</code>，这个 <code>1</code> 的位置就是 bit position。</p>
+</li>
+<li><p><strong>异或操作：</strong> 用当前 tick bitmap 的值与掩码做异或运算（XOR）：</p>
+<p>这样会将 bit position 对应的那一位翻转（0 变 1，1 变 0），其他位不变。</p>
+<ul>
+<li>如果该 bit 原来是 0，就表示我们添加了这个 tick；</li>
+<li>如果是 1，就表示我们移除了这个 tick。</li>
+</ul>
+</li>
+</ol>
+<h3 id="从-tick-bitmap-中读取-tick-的过程如下："><a href="#从-tick-bitmap-中读取-tick-的过程如下：" class="headerlink" title="从 tick bitmap 中读取 tick 的过程如下："></a>从 tick bitmap 中读取 tick 的过程如下：</h3><ol>
+<li><strong>获取前16位：</strong> 也就是 tick bitmap 的键，对应的格式如：</li>
+<li><strong>获取 bitmap 值：</strong> 使用上面的键从 tick bitmap 映射中获取一个 <code>uint256</code> 的值</li>
+<li><strong>确定 bit 位置：</strong> 假设我们找到了某一个 bit 被设置了，比如第 7 个位置，那么我们把数字 7 写成 8 位的二进制：</li>
+<li><strong>组合成 tick：</strong> 将上面的 8 位二进制追加到前面 16 位的 tick bitmap 键上：得到的就是原始的 <code>int24</code> 类型的 tick 值。</li>
+</ol>
+<h3 id="在一次swap操作中用于寻找下一个tick"><a href="#在一次swap操作中用于寻找下一个tick" class="headerlink" title="在一次swap操作中用于寻找下一个tick"></a>在一次swap操作中用于寻找下一个tick</h3><p>为了找到小于或等于当前 tick 的下一个初始化 tick，我们需要在 tick bitmap 的右侧进行查找。tick bitmap 的 key 是 int16 类型，在 Uniswap V3 的代码中被称为 word position。通过这个 key，我们可以获取一个 uint256 类型的值。我们希望寻找一个小于或等于当前 tick 的下一个初始化 tick。假设当前 tick 位于索引 7。如果我们在索引 7 的左侧查找为 1 的位，那我们其实是在寻找一个大于或等于当前 tick 的 tick。因此我们需要在索引 7 的右侧查找为 1 的位。</p>
+<p>为了在索引 7 的右侧寻找值为 1 的位，我们首先创建一个掩码（mask）。这个掩码会在索引 7 处设置为 1，并且索引 7 右边的所有位也都设置为 1。我们会用 tick bitmap 中存储的 uint256 与这个掩码做按位与（bitwise AND）操作，从而得到一个新值，在索引 7 左边的位全部变成 0。换句话说，这个掩码和按位与的操作能帮助我们得到从索引 7 右边开始的所有 1。接下来我们需要在这个结果中找到最左边的 1（即最高有效位）。比如在这个例子中，我们假设只有在某个偏右的位置才出现第一个 1。我们查找这个结果中的最高有效位，其索引为 1。这就是下一个为 1 的位在右侧的索引位置。</p>
+<p>现在我们已经知道了下一个 bit position，接下来就是计算下一个 tick。为了找到下一个 tick，我们从当前 tick 开始，先减去当前 bit position（用于清除低 8 位，使其全部变为 0），再加上新的 bit position。如果要找到“大于当前 tick 的下一个 tick”，思路和上面类似。但这次我们要在 tick bitmap 的左侧查找。</p>
+<p>再次回到 tick bitmap 的 key（int16 类型），我们仍然使用 key 为 -784 的位置，它对应一个 uint256 值。本例中假设第 7 位是 0。现在我们需要判断应该在哪个方向查找值为 1 的位。如果向右查找，我们得到的是小于或等于当前 tick 的值。因此，为了找到大于当前 tick 的下一个 tick，我们需要在索引 7 的左侧查找为 1 的位。为此我们创建一个新的掩码：该掩码在索引 7 处为 1，其左侧的位全为 1，右侧的位全为 0。我们将 tick bitmap 中的 uint256 值与这个掩码进行按位与操作，这样我们就得到了一个右侧为 0 的结果值。接下来我们从这个结果中查找最低有效位（即最右边的 1）。</p>
+<p>假设我们在索引 253 处找到了第一个为 1 的位。为了找到下一个 tick，我们从当前 tick 开始，减去当前 bit position（7），再加上下一个 bit position（253）以及 +1，确保结果大于当前 tick。</p>
+<h3 id="平方根价格（Square-Root-Price-X96）"><a href="#平方根价格（Square-Root-Price-X96）" class="headerlink" title="平方根价格（Square Root Price X96）"></a>平方根价格（Square Root Price X96）</h3><p>表示两个资产价格的平方根，而不是直接的价格。</p>
+<p><code>sqrtPriceX96</code> 是一个 Q64.96 固定点数，本质是 uint160(2^160^)。 </p>
+<p>其平方为 <code>sqrtPriceX96^2</code>，最大为 $2^{320}$</p>
+<h4 id="Uniswap-协议需要在-sqrtPriceX96-和-tick-索引之间进行双向转换。这个过程由-TickMath-库的以下两个函数处理："><a href="#Uniswap-协议需要在-sqrtPriceX96-和-tick-索引之间进行双向转换。这个过程由-TickMath-库的以下两个函数处理：" class="headerlink" title="Uniswap 协议需要在 sqrtPriceX96 和 tick 索引之间进行双向转换。这个过程由 TickMath 库的以下两个函数处理："></a>Uniswap 协议需要在 <code>sqrtPriceX96</code> 和 tick 索引之间进行双向转换。这个过程由 TickMath 库的以下两个函数处理：</h4><ul>
+<li><code>getTickAtSqrtRatio</code>：将 <code>sqrtPriceX96</code> 转换为 tick 索引</li>
+<li><code>getSqrtRatioAtTick</code>：将 tick 索引转换为 <code>sqrtPriceX96</code></li>
+</ul>
+<p>首先计算tick的绝对值，然后检查tick在合法范围内。接着通过平方乘算法用Q128.128格式计算tick为负数的时候：$\sqrt{Price} &#x3D;\sqrt{ 1.0001^{\text{-|tick|}}}$   如果原始tick为正数，则对结果取倒数即：$\Large {\frac{1}{\sqrt{1.0001^{-|tick|}}} &#x3D; \sqrt{1.0001^{|tick|}}}$  。然后将Q128.128值右移32位，转换成Q64.96格式，返回<code>sqrtPriceX96</code>。</p>
+<ul>
+<li><p>Uniswap V3 的 tick 范围是 [-887272, 887272]。由于<code> getSqrtPriceRatioAtTick</code> 只直接计算负 tick，正 tick 通过倒数实现，因此只需处理 [-887272, 0] 区间。</p>
+</li>
+<li><p>为了使用平方-乘算法，必须预先计算各个幂次的情形。Uniswap V3 在函数中预计算了以下形式的值：</p>
+<p>$\sqrt{1.0001^0}, \sqrt{1.0001^{1}},\ \sqrt{1.0001^{2}},\ \sqrt{1.0001^{4}},\ \ldots,\ \sqrt{1.0001^{2^{19}}}$   887273 可由 20 位二进制表示（因为 $2^{20} &#x3D; 1048576 &gt; 887273$），这就是为何只预计算 20 个常量。</p>
+<p>Uniswap V3是将这些定点数 <strong>向上取整</strong>（除了 tick &#x3D;  -1）。</p>
+</li>
+</ul>
+<p>Uniswap V3 中价格用公式表达：<br>$$<br>\text{price} &#x3D; \frac{\text{sqrtPriceX96}^2}{2^{192}}<br>$$<br>所以最大 price 为：<br>$$<br>\text{price}_{\max} &#x3D; \frac{2^{320}}{2^{192}} &#x3D; 2^{128}<br>$$<br>X96表示这个数值被放大了2^96^倍，用于在整数环境下保护高精度的浮点数（因为智能合约中不方便使用浮点数）</p>
+<p>用公式表达就是<br>$$<br>\text{sqrtPriceX96} &#x3D; \sqrt{Price} \times 2^{96}<br>$$</p>
+<p>$$<br>\text{Price} &#x3D; \left( \frac{\text{sqrtPriceX96}}{2^{96}} \right)^2<br>$$</p>
+<p>$$<br>\text{Price} &#x3D; 1.0001^{\text{tick}}<br>$$</p>
+<p>由SqrtPriceX96 计算 Tick Index，然而这个公式仍不够精确，因为 SqrtPriceX96 是连续的浮点数，而 tick index 是离散的整数。因此我们需要 <strong>向下取整</strong>：</p>
+<p>$$<br>\text{tick} &#x3D; \left\lfloor \frac{2 \cdot \log \left( \frac{\text{sqrtPriceX96}}{2^{96}} \right)}{\log(1.0001)} \right\rfloor<br>$$</p>
+<p>其中由于对数换底公式$\log_b(a) &#x3D; \frac{\log_k(a)}{\log_k(b)}$，对于tick的公式，不论你用自然对数、底2、底10……都不会影响最终结果。</p>
+<p>$$<br>\text{sqrtPriceX96} &#x3D; \sqrt{1.0001^{\text{tick}}} \times 2^{96}<br>$$</p>
+<p>$$<br>\Large\text{sqrtPriceX96} &#x3D; 1.0001^{\frac{\text{tick}}{2}} \times 2^{96}<br>$$</p>
+<p>使用平方根价格可以简化计算，比如在计算流动性、价格变动时，乘法和除法变得更高效且更准确，在价格的变动范围很大时，用平方根价格可以更好地保持数值稳定性和精度。实际上，上述公式并非完全正确，因为<code>sqrtPriceX96</code> 是连续的值，而tick是离散整数，因此计算tick时必须向下取整（floor）。例如，若某价格位于两个 tick 之间，其对应的 tick 是靠下的那个。这也可以通过 Uniswap 的价格工具可视化看到：虽然价格是连续变化的，但 tick 始终是<strong>刚好小于价格的那一个整数值</strong>。</p>
+<p>Uniswap V3 实际上存储的是价格的平方根$\sqrt{P}\ $（存在槽0中，槽0存储的是一个结构体，里面包含平方根价格），而不是价格本身。这样的方法提高了gas效率。由于存储 tick index 占用的位数比存储价格要少，因此协议存储的是 tick index，而不是 tick 对应的实际价格。</p>
+<h3 id="Uniswap-v3-流动性提供者（LP）的手续费"><a href="#Uniswap-v3-流动性提供者（LP）的手续费" class="headerlink" title="Uniswap v3 流动性提供者（LP）的手续费"></a>Uniswap v3 流动性提供者（LP）的手续费</h3><p>Uniswap V3的手续费是对输入代币收取的。假设Alice在一段时间内持续提供S的流动性，并且这段时间中发生了多次交换。同时，池中整体的流动性可能会发生变化，但Alice并没有增减她所持有的流动性，因此S保持不变。用f<del>i</del>表示在每次活动流动性为L<del>i</del>时，所收取的手续费。变量i的取值范围从0到N。则手续费为：$\Large f &#x3D; S \cdot \sum_{i&#x3D;0}^{n} \frac{f_i}{L_i}$ ，去掉流动性S，即为手续费增长（fee growth,即为f<del>g</del>） $\Large f_g &#x3D; \frac{f_0}{L_0} + \frac{f_1}{L_1} + \cdots + \frac{f_N}{L_N}$。换句话说，我们把每次swap中收取的手续费除以当时的流动性，然后将所有这些结果相加。假设某次swap中收取了f<del>0</del> 的手续费，而当时的流动性是L<del>0</del>，那么这次贡献的fee growth就是$\Large\frac{f<del>0}{L</del>0}$。将所有swap的情况从i &#x3D; 0 加到N，我们可以简写成如下求和形式：$$\Large\sum_{i&#x3D;0}^{N} \frac{f_i}{L_i}$$</p>
+<p><strong>fee growth 是 Uniswap V3 用于追踪手续费分配的核心状态变量</strong>；它按每次 swap 收取的手续费除以流动性累积而成；根据 swap 的方向，fee growth 的轨迹会呈现为折线；随着价格的变化，fee growth（手续费增长）有时会超出这个范围，有时则处于范围之内。那么，在这种情况下我们计算实际收取的手续费的关键思想是：<strong>计算在流动性头寸价格范围内的 fee growth，并将其乘以对应的流动性数量</strong>。我们可以将一段的 fee growth 想象成一条橙色的线，其高度就代表这个头寸内部的手续费增长。手续费的变化和输入的代币有关，若fee growth不变，tick会向左移动，因为输入代币被换入（相对来说被换入的更多），价格下降，若fee growth 增加，tick向右移动则说明有更多的输入代币换出，价格上升。</p>
+<p>将 tick 以下手续费增长 $f_b$ 表达式：</p>
+<p>$$\Large f_b &#x3D;\begin{cases}f_{o,i}, &amp; \text{若 } i \le i_c \f_g - f_{o,i}, &amp; \text{若 }  i&gt; i_c\end{cases}$$</p>
+<p>tick 上方手续费增长 $f_a$ 表达式：</p>
+<p>$$\Large \begin{equation}<br>f_a &#x3D;<br>\begin{cases}<br>f_g - f_{o,i}, &amp; \text{若 } i \le i_c \<br>f_{o,i}, &amp; \text{若 } i &gt; i_c<br>\end{cases}<br>\end{equation}$$</p>
+<p>假设 $S$ 是该仓位在 tick 区间 $[i_{\text{lower}}, i_{\text{upper}}]$ 上提供的流动性，且在整个过程中保持不变。</p>
+<p>那么，这个仓位应得的手续费为：<br>$$<br>\text{应得手续费} &#x3D; S \cdot (F_1 - F_0)<br>$$<br>其中：</p>
+<ul>
+<li>$F_0$：仓位创建时的手续费增长快照；</li>
+<li>$F_1$：手续费提取时的快照；</li>
+<li>$S$：仓位在此区间内提供的流动性；</li>
+<li>$F_1 - F_0$：单位流动性所获得的手续费增长。</li>
+</ul>
+<h3 id="Uniswap-V3-中的-TWAP（时间加权平均数）"><a href="#Uniswap-V3-中的-TWAP（时间加权平均数）" class="headerlink" title="Uniswap  V3 中的 TWAP（时间加权平均数）"></a>Uniswap  V3 中的 TWAP（时间加权平均数）</h3><p>在 Uniswap V3 中，<strong>时间加权平均价格（TWAP, Time Weighted Average Price）</strong> 是通过<strong>几何平均数</strong>来计算的。<br> 这与 Uniswap V2 不同，V2 是通过对每一秒的价格求和，然后除以时间长度来计算 TWAP，本质上是使用<strong>算术平均数</strong>。在 Uniswap V3 中，TWAP 使用<strong>价格的几何平均数</strong>计算，具体操作是：将每一秒的价格相乘，然后对这些乘积取 $n$ 次方根（其中 $n$ 是价格的数量）。</p>
+<p>假设我们在时间区间 $[t_1+1, t_2]$ 中每秒钟的价格分别为 $P(t_1+1), P(t_1+2), \dots, P(t_2)$。</p>
+<p>那么 TWAP 可以记作 $P_{\text{avg}}$，计算公式为：<br>$$<br>P_{\text{avg}} &#x3D; \sqrt[n]{P(t_1+1) \cdot P(t_1+2) \cdots P(t_2)}<br>$$<br>其中，$n &#x3D; t_2 - t_1$，是区间内的秒数。</p>
+<h4 id="如何计算项数"><a href="#如何计算项数" class="headerlink" title="如何计算项数"></a>如何计算项数</h4><p>比如时间区间是：</p>
+<ul>
+<li><p>$t_1+1, t_1+2$：两项<br>$$<br>t_2 - (t_1+1) + 1 &#x3D; 2<br>$$</p>
+</li>
+<li><p>$t_1+1, t_1+2, t_1+3$：三项<br>$$<br>t_1+3 - (t_1+1) + 1 &#x3D; 3<br>$$</p>
+</li>
+</ul>
+<p>所以一般来说，项数为：<br>$$<br>n &#x3D; t_2 - t_1<br>$$<br>在智能合约中，直接进行大量乘法开销太大。因此 Uniswap V3 引入了一个状态变量 <strong>tick 累加器</strong>，记作 <code>tick cumulative</code>。我们用 $a(t)$ 表示 tick 累加器，在时间 $t$ 的值是从合约部署开始每秒 tick 的和：<br>$$<br>a(t) &#x3D; \sum_{i&#x3D;0}^t T(i)<br>$$</p>
+<h4 id="将-TWAP-表达式替换为-tick-表达式"><a href="#将-TWAP-表达式替换为-tick-表达式" class="headerlink" title="将 TWAP 表达式替换为 tick 表达式"></a>将 TWAP 表达式替换为 tick 表达式</h4><p>从最初的 TWAP 几何平均表达式开始：<br>$$<br>P_{\text{avg}} &#x3D; \sqrt[n]{P(t_1+1) \cdot P(t_1+2) \cdots P(t_2)}<br>$$<br>使用 $P &#x3D; 1.0001^T$ 替换：<br>$$<br>P_{\text{avg}} &#x3D; \sqrt[n]{1.0001^{T(t_1+1)} \cdot 1.0001^{T(t_1+2)} \cdots 1.0001^{T(t_2)}}<br>$$<br>利用幂运算法则（相同底数乘积 → 指数相加）：<br>$$<br>P_{\text{avg}} &#x3D; \left(1.0001^{T(t_1+1) + T(t_1+2) + \cdots + T(t_2)}\right)^{1&#x2F;(t_2 - t_1)}<br>$$<br>等价于：<br>$$<br>P_{\text{avg}} &#x3D; 1.0001^{\frac{\sum_{i &#x3D; t_1+1}^{t_2} T(i)}{t_2 - t_1}}<br>$$<br>我们已知：<br>$$<br>a(t_2) &#x3D; \sum_{i&#x3D;0}^{t_2} T(i), \quad a(t_1) &#x3D; \sum_{i&#x3D;0}^{t_1} T(i)<br>$$<br>所以：<br>$$<br>\sum_{i &#x3D; t_1+1}^{t_2} T(i) &#x3D; a(t_2) - a(t_1)<br>$$<br>最终 TWAP 表达式化简为：<br>$$<br>P_{\text{avg}} &#x3D; 1.0001^{\frac{a(t_2) - a(t_1)}{t_2 - t_1}}<br>$$<br>这个指数部分：<br>$$<br>\frac{a(t_2) - a(t_1)}{t_2 - t_1}<br>$$<br>称为<strong>时间加权平均 tick 值（TWAT）</strong>，是计算 TWAP 的关键中间值。</p>
+<p>其中：</p>
+<ul>
+<li>$a(t)$：tick 累加器</li>
+<li>$T(i)$：第 $i$ 秒的 tick 值</li>
+<li>$P$：价格</li>
+<li>$T$：tick 值</li>
+</ul>
+<h3 id="计算Token-X和Token-Y的TWAP"><a href="#计算Token-X和Token-Y的TWAP" class="headerlink" title="计算Token X和Token Y的TWAP"></a>计算Token X和Token Y的TWAP</h3><p>我们设定：</p>
+<ul>
+<li>$P_x$：Token X 的现价（以 Token Y 表示）</li>
+<li>$P_y$：Token Y 的现价（以 Token X 表示）</li>
+</ul>
+<p>例如：若 Token X 为 ETH，Token Y 为 USDC，则：<br>$$<br>P_y &#x3D; \frac{1}{P_x}<br>$$<br>无论是 Uniswap V2 还是 V3，<strong>现价的倒数关系始终成立</strong>。</p>
+<p>设：</p>
+<ul>
+<li>$P_x^{avg}$：Token X 的时间加权平均价格</li>
+<li>$P_y^{avg}$：Token Y 的时间加权平均价格</li>
+</ul>
+<p>在 <strong>Uniswap V2 中</strong>：<br>$$<br>P_y^{avg} \ne \frac{1}{P_x^{avg}}<br>$$<br>但在 <strong>Uniswap V3 中</strong>：<br>$$<br>P_y^{avg} &#x3D; \frac{1}{P_x^{avg}}<br>$$<br>在 V3 中，我们通过 <strong>tick 累积器</strong>计算 TWAP。</p>
+<ul>
+<li>价格与 tick 的关系：</li>
+</ul>
+<p>$$<br>P &#x3D; 1.0001^T \quad \Rightarrow \quad T &#x3D; \log_{1.0001} P<br>$$</p>
+<p>令：</p>
+<ul>
+<li>$T_i$：第 $i$ 秒的 tick 值</li>
+<li>$P_{x,i} &#x3D; 1.0001^{T_i}$</li>
+<li>$P_{y,i} &#x3D; \frac{1}{P_{x,i}} &#x3D; 1.0001^{-T_i}$</li>
+</ul>
+<p>若我们计算 $n$ 秒内的平均 tick：<br>$$<br>T_x^{avg} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n T_i<br>$$<br>对应的 Y 的 tick：<br>$$<br>T_y^{avg} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n (-T_i) &#x3D; -T_x^{avg}<br>$$</p>
+<hr>
+<p>然后：<br>$$<br>P_x^{avg} &#x3D; 1.0001^{T_x^{avg}}, \quad P_y^{avg} &#x3D; 1.0001^{T_y^{avg}} &#x3D; 1.0001^{-T_x^{avg}} &#x3D; \frac{1}{P_x^{avg}}<br>$$<br>这就严格证明了在 <strong>Uniswap V3 中</strong>：<br>$$<br>P_y^{avg} &#x3D; \frac{1}{P_x^{avg}}<br>$$</p>
+<h3 id="Uniswap-V3-Factory-Contact-Calls"><a href="#Uniswap-V3-Factory-Contact-Calls" class="headerlink" title="Uniswap V3 Factory Contact Calls"></a>Uniswap V3 Factory Contact Calls</h3><p>在Uniswap V3中，使用<code>create2</code>指令部署Pool合约。由于这一特性，合约地址可以在合约尚未部署之前被确定。但是Uniswap V3 工厂合约部署Pool合约的方式并不直接。</p>
+<p>一般的<code>create2</code>计算合约地址都是</p>
+<p><code>keccak256(0xff ++ 部署者地址 ++ salt ++ keccak256(创建字节码 + 构造参数))</code></p>
+<p>计算完成后，取结果的最后20个字节，即合约地址。</p>
+<ul>
+<li><code>0xff</code>：固定的前缀，用于区分 <code>create</code> 和 <code>create2</code>。</li>
+<li><strong>部署者地址</strong>：部署合约的账户地址，这里是工厂合约地址。</li>
+<li><strong>salt</strong>：由部署者指定的 32 字节随机数。</li>
+<li><strong>创建字节码的 keccak256 哈希</strong>：这是合约的创建码，包含合约逻辑和构造函数逻辑。</li>
+</ul>
+<p>其中，若部署的是同一个合约，那么创建字节码固定。构造参数和 <code>salt</code> 可变，从而控制地址的不同。</p>
+<p>而在Uniswap V3中，Pool合约不带构造函数参数。这意味着我们只能通过<code>salt</code>来使每个Pool地址唯一。</p>
+<p>我们不能把所有初始化参数都放进 <code>salt</code>，因为 <code>salt</code> 只能包含 token0、token1 和 fee。我们也不能将 factory 地址或 tick spacing 放入构造参数，因为这样无法保证地址只由 token0、token1 和 fee 决定。</p>
+<p><strong>地址唯一性目标</strong>：</p>
+<ul>
+<li>将 <code>salt</code> 设置为：<code>keccak256(token0, token1, fee)</code></li>
+<li>不使用构造函数参数</li>
+</ul>
+<p><strong>初始化数据目标</strong>：</p>
+<ul>
+<li>将初始化数据（token0、token1、fee、factory 地址、tick spacing）<strong>暂时存储在工厂合约中</strong></li>
+</ul>
+<h3 id="Uniswap-V3-的Swap"><a href="#Uniswap-V3-的Swap" class="headerlink" title="Uniswap V3 的Swap"></a>Uniswap V3 的Swap</h3><p>在 Uniswap V3 中，执行 swap（交换）操作的函数位于名为 <strong>Uniswap V3 Pool</strong> 的合约中，该函数就叫做 <code>swap</code>。</p>
+<h3 id="swap-函数的关键输入参数如下："><a href="#swap-函数的关键输入参数如下：" class="headerlink" title="swap 函数的关键输入参数如下："></a>swap 函数的关键输入参数如下：</h3><ul>
+<li>**<code>zeroForOne</code>**：一个布尔值，指示交易方向。<ul>
+<li>如果为 <code>true</code>，表示从 token0 交换成 token1；</li>
+<li>否则表示从 token1 交换成 token0。</li>
+</ul>
+</li>
+<li>**<code>amountSpecified</code>**：一个数值，可能为正或负，表示用户希望输入（正数）或输出（负数）的 token 数量。</li>
+<li>**<code>sqrtPriceLimit</code>**：交换过程中的价格上限（或下限），使用价格的平方根表示。</li>
+</ul>
+<p>接着算法会进入一个 <code>while</code> 循环，不断计算输入输出量。循环中使用的变量包括：</p>
+<ul>
+<li><code>amountSpecifiedRemaining</code>：初始化为 <code>amountSpecified</code>。</li>
+<li><code>sqrtPriceCurrent</code>：当前的价格（平方根）。</li>
+</ul>
+<p>循环持续条件：</p>
+<ul>
+<li><code>amountSpecifiedRemaining ≠ 0</code>，即还有 token 没处理完；</li>
+<li>当前平方根价格 <code>sqrtPrice</code> 未达到 <code>sqrtPriceLimit</code>。</li>
+</ul>
+<p>while 循环继续的条件是：</p>
+<ul>
+<li><code>amountSpecifiedRemaining ≠ 0</code>；</li>
+<li><code>sqrtPriceCurrent ≠ sqrtPriceLimit</code>。</li>
+</ul>
+<p>在每一轮迭代中：</p>
+<ol>
+<li>读取下一个 tick；</li>
+<li>计算 <code>sqrtPriceNext</code>；</li>
+<li>使用 <code>computeSwapStep()</code> 函数计算：<ul>
+<li>amount in</li>
+<li>amount out</li>
+<li>fee</li>
+</ul>
+</li>
+<li>更新价格；</li>
+<li>根据交换类型更新剩余输入量或输出目标。</li>
+</ol>
+<p>最终返回：</p>
+<ul>
+<li><code>amountSpecifiedRemaining</code></li>
+<li><code>amountCalculated</code></li>
+</ul>
+<p>根据这些值，计算最终 token0 和 token1 的输入输出量。</p>
+<h4 id="循环体的处理流程如下："><a href="#循环体的处理流程如下：" class="headerlink" title="循环体的处理流程如下："></a>循环体的处理流程如下：</h4><ol>
+<li><strong>检索下一个 tick</strong>；</li>
+<li>计算该 tick 对应的价格平方根 <code>sqrtPriceNext</code>；</li>
+<li>在当前价格到 <code>sqrtPriceNext</code> 范围内，调用 <code>computeSwapStep()</code> 计算：<ul>
+<li>输入量（amount in）</li>
+<li>输出量（amount out）</li>
+<li>手续费（fee）</li>
+</ul>
+</li>
+<li>更新当前价格到 <code>sqrtPriceNext</code>；</li>
+<li>根据交换类型更新：<ul>
+<li>对于 <strong>exact input</strong>：<ul>
+<li><code>amountSpecifiedRemaining -= (amountIn + fee)</code></li>
+<li><code>amountCalculated = amountOut</code></li>
+</ul>
+</li>
+<li>对于 <strong>exact output</strong>：<ul>
+<li><code>amountSpecifiedRemaining += amountOut</code></li>
+<li><code>amountCalculated = amountIn + fee</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>更新以下局部变量：<ul>
+<li>当前流动性</li>
+<li>当前价格平方根</li>
+<li>当前 tick</li>
+<li>累积手续费增长量（feeGrowth）</li>
+</ul>
+</li>
+</ol>
+<p>当 <code>while</code> 循环结束时，算法将拥有：</p>
+<ul>
+<li>最新的流动性</li>
+<li>最新的价格平方根</li>
+<li>最新 tick</li>
+<li>token0 和 token1 的输入&#x2F;输出数量</li>
+<li>总手续费</li>
+</ul>
+<p>然后，合约更新全局状态，包括：</p>
+<ul>
+<li>流动性</li>
+<li>sqrtPrice</li>
+<li>tick</li>
+<li>手续费增长变量（feeGrowth）</li>
+</ul>
+<p>接下来触发 swap 回调（<code>swapCallback</code>），由 <code>msg.sender</code>（必须是合约）响应，并将 token 发送到 Uniswap V3 Pool 合约。<br> 最后，Uniswap V3 池子合约会检查收到的 token 是否足够。</p>
+<h3 id="执行核心计算的函数：computeSwapStep"><a href="#执行核心计算的函数：computeSwapStep" class="headerlink" title="执行核心计算的函数：computeSwapStep()"></a>执行核心计算的函数：computeSwapStep()</h3><p>如果是 <strong>exact input</strong>，计算从 <code>sqrtPrice</code> 到 <code>sqrtPriceTarget</code> 范围内可接收的最大输入量。</p>
+<p>如果是 <strong>exact output</strong>，计算最大可输出量。</p>
+<p>计算交易后会移动到的新价格：<code>sqrtPriceNext</code>。</p>
+<p>假设你执行一个 <code>zeroForOne</code> 的交换，即：token0 输入、token1 输出。</p>
+<ul>
+<li>当前价格是 <code>sqrtPrice</code></li>
+<li>目标价格是 <code>sqrtPriceTarget</code></li>
+</ul>
+<p>随着 token0 输入，价格从右向左移动，流动性会增加 token0、减少 token1。</p>
+<ul>
+<li><strong>max amount in</strong>：在价格未突破 <code>sqrtPriceTarget</code> 的前提下，最多可输入多少 token0。</li>
+<li><strong>max amount out</strong>：在价格未突破 <code>sqrtPriceTarget</code> 的前提下，最多可输出多少 token1。</li>
+</ul>
+<p><code>sqrtPriceNext</code> 是由于本次交易产生的价格变化后，新的价格平方根位置。</p>
+<p>例如，一开始的 <code>sqrtPrice</code> 在右边，在输入 token0 之后，新的价格平方根位置变为左边，这个新的位置就是 <code>sqrtPriceNext</code>。</p>
+<p><code>computeSwapStep()</code> 会返回：</p>
+<ul>
+<li><code>sqrtPriceNext</code></li>
+<li><code>amountIn</code></li>
+<li><code>amountOut</code></li>
+<li><code>feeAmount</code></li>
+</ul>
+<p>这些数据用于更新池子状态并最终完成交换逻辑。</p>
+<h3 id="平方与乘算法（Square-and-Multiply-Algorithm）"><a href="#平方与乘算法（Square-and-Multiply-Algorithm）" class="headerlink" title="平方与乘算法（Square and Multiply Algorithm）"></a>平方与乘算法（Square and Multiply Algorithm）</h3><p>平方与乘算法是一种以对数时间复杂度O（log<del>n</del>）计算整数幂的方法。可以简单理解为将底数连续乘以自身n次，即直接计算a^n^的方法需要执行n-1次乘法运算，因此时间复杂度是O（n）。Uniswap V3 使用了平方与乘法算法来将 tick 索引转换为平方根价格。</p>
+<p>假设我们希望计算 $a^{20}$，而不是将 $a$ 连续乘以自身 20 次，我们可以如下操作：</p>
+<ol>
+<li>从 $a$ 开始</li>
+<li>不断平方（而不是简单相乘）</li>
+<li>最终组合出 $a^{20}$</li>
+</ol>
+<p>例如：</p>
+<ul>
+<li>$a^2 &#x3D; a \cdot a$</li>
+<li>$a^4 &#x3D; (a^2)^2$</li>
+<li>$a^8 &#x3D; (a^4)^2$</li>
+<li>$a^{16} &#x3D; (a^8)^2$</li>
+<li>然后：<br>$a^{20} &#x3D; a^{16} \cdot a^4$</li>
+</ul>
+<p>这个幂的“加法组合”方式，源自代数学中的<strong>幂的乘法法则</strong>（product-of-powers rule）：</p>
+<blockquote>
+<p>$a^m \cdot a^n &#x3D; a^{m+n}$</p>
+</blockquote>
+<h4 id="平方指数序列（Squared-Exponents-Sequence）"><a href="#平方指数序列（Squared-Exponents-Sequence）" class="headerlink" title="平方指数序列（Squared Exponents Sequence）"></a>平方指数序列（Squared Exponents Sequence）</h4><p>“平方指数序列”这一术语，指的是如下形式的序列：其中每一项都是前一项的平方，底数 $a$ 可以是任意非零值。<br>$$<br>[a^1, a^2, a^4, a^8, a^{16}, \dots]<br>$$</p>
+<h4 id="小数底数的平方与乘法（Fractional-Base）和分数指数的平方与乘法算法（Fractional-Exponents）"><a href="#小数底数的平方与乘法（Fractional-Base）和分数指数的平方与乘法算法（Fractional-Exponents）" class="headerlink" title="小数底数的平方与乘法（Fractional Base）和分数指数的平方与乘法算法（Fractional Exponents）"></a>小数底数的平方与乘法（Fractional Base）和分数指数的平方与乘法算法（Fractional Exponents）</h4><p>如果我们<strong>提前知道底数是固定值</strong>，且所有可能的幂次有一个<strong>已知的最大值</strong>，我们可以<strong>预先计算平方指数序列并缓存数值</strong>，之后只需查表（而不是重新计算乘法）即可。使用缓存方法时，我们必须预先知道应用程序中可能出现的最大指数值。分数指数的平方与乘算法本质上仍是一个整数幂的计算，指数只是换了表达方式。</p>
+<p>因此，即使指数是小数（或分数），只要它是整数除以常数，我们也可以使用相同的策略预计算平方指数序列。</p>
+<h4 id="如何在平方指数序列中挑选元素"><a href="#如何在平方指数序列中挑选元素" class="headerlink" title="如何在平方指数序列中挑选元素"></a>如何在平方指数序列中挑选元素</h4><p>如果我们希望计算a^k^，那我们如何从已缓存的平方指数序列中选择正确的项。</p>
+<p>方法一：</p>
+<p>最朴素的方式是：从最大的预计算幂开始往下遍历，每次减去当前项，知道总和等于目标幂。尽管有效，但这种方式是线性的，性能不理想。</p>
+<p>最好的方式是使用二进制表示法</p>
+<p>与上述的线性查找方法不同，我们可以更高效地利用一个关键观察：目标指数的二进制表示可以准确告诉我们需要从平方指数序列中选择哪些元素。</p>
+<h4 id="二进制转十进制回顾"><a href="#二进制转十进制回顾" class="headerlink" title="二进制转十进制回顾"></a>二进制转十进制回顾</h4><p>要将一个二进制数转换为十进制数，我们使用如下公式，其中<br> $B_i$ 是该二进制数的第 $i$ 位（从右往左，第 0 位开始）：<br>$$<br>\text{Decimal} &#x3D; B_0 \cdot 2^0 + B_1 \cdot 2^1 + B_2 \cdot 2^2 + \cdots<br>$$<br>例如：</p>
+<ul>
+<li>13 的二进制是 <code>1101</code>，因为 $8 + 4 + 0 + 1 &#x3D; 13$</li>
+<li>52 的二进制是 <code>110100</code>，因为 $32 + 16 + 0 + 4 + 0 + 0 &#x3D; 52$</li>
+</ul>
+<p>因此，如果我们要计算 $B^{13}$，而平方指数序列是<br> $[B^1, B^2, B^4, B^8, B^{16}, …]$，我们只需查看 <code>13</code> 的二进制表示为 <code>1101</code>，即可得出我们需要取：</p>
+<ul>
+<li>第 3 位：$2^3 &#x3D; 8$</li>
+<li>第 2 位：$2^2 &#x3D; 4$</li>
+<li>第 0 位：$2^0 &#x3D; 1$</li>
+</ul>
+<p>然后计算：<br>$$<br>B^{13} &#x3D; B^8 \cdot B^4 \cdot B^1<br>$$<br>因为这几个幂次的乘积等于 $B^{13}$。</p>
+<p>如何检测某一位是否为1：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function nthBitSet(uint256 x, uint8 n) public pure returns (bool isSet) &#123;</span><br><span class="line">    isSet = x &amp; (uint256(2)**n) != 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的原理如下：</p>
+<ul>
+<li><code>uint256(2)**n</code> 会创建一个只有第 <code>n</code> 位为 1 的数字。例如 <code>2**3 = 8</code>，其二进制为 <code>1000</code></li>
+<li>如果 <code>x &amp; (2**n)</code> 的结果不为 0，说明 <code>x</code> 的第 <code>n</code> 位也为 1</li>
+</ul>
+<h4 id="二进制与运算的原理"><a href="#二进制与运算的原理" class="headerlink" title="二进制与运算的原理"></a>二进制与运算的原理</h4><p>只有两个对应的位都为 1 时，位与操作（bitwise AND）才返回 1，否则返回 0。</p>
+<p>例如</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">x      = 1101  (13 的二进制)</span><br><span class="line">2**3   = 1000  (8 的二进制)</span><br><span class="line">--------------------------</span><br><span class="line">x <span class="built_in">&amp;</span> 8  = 1000  =&gt; 非 0，返回 true</span><br><span class="line"></span><br><span class="line">x      = 1101</span><br><span class="line">2**1   = 0010</span><br><span class="line">--------------------------</span><br><span class="line">x <span class="built_in">&amp;</span> 2  = 0000 =&gt; 返回 false</span><br><span class="line"></span><br><span class="line">x      = 1101</span><br><span class="line">2**0   = 0001</span><br><span class="line">--------------------------</span><br><span class="line">x <span class="built_in">&amp;</span> 1  = 0001 =&gt; 返回 true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="实际应用中：使用定点数的平方-乘法算法"><a href="#实际应用中：使用定点数的平方-乘法算法" class="headerlink" title="实际应用中：使用定点数的平方-乘法算法"></a>实际应用中：使用定点数的平方-乘法算法</h4><p>在智能合约等实际系统中，通常不能使用浮点数，而是使用<strong>定点数</strong>（fixed-point numbers，又称 Q-numbers）。</p>
+<p>例如：两个 18 位小数的定点数相乘，结果必须除以 $10^{18}$ 进行归一化，否则结果会有 36 位小数。将 Q128 定点常量用于乘法，然后右移 128 位归一化</p>
+<h4 id="为什么不直接使用指数运算的opcode"><a href="#为什么不直接使用指数运算的opcode" class="headerlink" title="为什么不直接使用指数运算的opcode"></a>为什么不直接使用指数运算的opcode</h4><p>当我们将一个整数提升到另一个整数的幂时，通常使用虚拟机（如EVM）内置的指数运算指令（opcode）是更高效的做法。然后这个opcode 并不包含我们前面提到的“归一化步骤”。因此如果a^b  中的a或b中至少有一个是定点数，那么我们就不能使用虚拟机内置的exp指令来完成运算。</p>
+<h3 id="Q数格式（Q-Number-Format）"><a href="#Q数格式（Q-Number-Format）" class="headerlink" title="Q数格式（Q Number Format）"></a>Q数格式（Q Number Format）</h3><p>Q数格式是一种用于描述二进制定点数（fixed-point number）的记法</p>
+<h4 id="Solidity中定点数的使用背景"><a href="#Solidity中定点数的使用背景" class="headerlink" title="Solidity中定点数的使用背景"></a>Solidity中定点数的使用背景</h4><p>由于Solidity不支持浮点数（floating point），所以我们常用定点数来存储小数部分。实现方式：将小数乘以一个整数，使其变成整数来存储（这可能会带来精度损失）因为小数部分只能精确表示2 的幂分数，无法精确表示无法精确表示像 1&#x2F;3 这样的十进制分数。</p>
+<p>Q数使用2的幂而不是10的幂进行放大，因为在EVM中，乘&#x2F;除以2 的幂可以用移位操作来完成（gas更省）：</p>
+<ul>
+<li><code>x &lt;&lt; n</code> 等价于 x * 2^n^</li>
+<li><code>x &gt;&gt; n</code> 等价于 x &#x2F; 2^n^</li>
+</ul>
+<h4 id="Q数格式结构"><a href="#Q数格式结构" class="headerlink" title="Q数格式结构"></a>Q数格式结构</h4><p>Q数通常写作<code>Qm.n</code>，表示：</p>
+<ul>
+<li><code>m</code>是整数部分所占的位数（bits）</li>
+<li><code>n</code>是小数部分所占的位数（bits）</li>
+</ul>
+<p>总位数是m+ n， 在<code>Qm.n</code>中表示x： x &lt;&lt; 2^n^  ，即x*2^n^ 。最大可表示值为：</p>
+<ul>
+<li>最大整数部分：2^m^-1</li>
+<li>最大小数部分：1-  1&#x2F;2^n^</li>
+<li>总最大值约为 2^m^ - 1 + (1-  1&#x2F;2^n^) &#x3D; 2^m^ - 1&#x2F;2^n^</li>
+</ul>
+<p>Q数格式实际存储位宽要求：</p>
+<ul>
+<li>Q64.64 最少需要 <code>uint128</code> </li>
+<li>Q64.96 最少需要 <code>uint160</code></li>
+<li>Q128.128 需要 <code>uint256</code></li>
+</ul>
+<h4 id="Q-数加-减-法"><a href="#Q-数加-减-法" class="headerlink" title="Q 数加(减)法"></a>Q 数加(减)法</h4><p>要对两个 Q 数相加(减)，它们必须具有相同的小数位数（即 n 相同），否则需要通过位移对齐小数点。</p>
+<h4 id="Q-数乘法"><a href="#Q-数乘法" class="headerlink" title="Q 数乘法"></a>Q 数乘法</h4><p>两个 Q 数相乘后，结果需右移 n 位，以还原正确的定点格式</p>
+<p><code>product = (a * b) &gt;&gt; n;</code></p>
+<h4 id="Q-数除法"><a href="#Q-数除法" class="headerlink" title="Q 数除法"></a>Q 数除法</h4><p>两个 Q 数相除，先将分子左移 n 位</p>
+<p><code>quotient = (a &lt;&lt; n) / b;</code></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">zhaojx</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/01/27/UniswapV3/">http://example.com/2026/01/27/UniswapV3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">小阿修的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DeFi/">DeFi</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/01/27/UniswapV2/" title="UniswapV2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">UniswapV2</div></div><div class="info-2"><div class="info-item-1">UniswapV2Uniswap V2 是以太坊上去中心化交易所（DEX）的第二个主要版本。它使用 自动做市商（AMM） 机制，允许用户在无需订单簿的情况下进行代币交易。以下是 Uniswap V2 的核心概念和关键点：  1. Uniswap V2 主要特性 基于 AMM（自动做市商）  采用 恒定乘积公式 x * y &#x3D; L^2^，保证流动性池中两个代币的乘积保持不变。   流动性池（Liquidity Pools）  由两个代币组成，例如 ETH&#x2F;USDC。 交易由池内资产重新平衡完成。   去中心化 &amp; 无需许可  任何人都可以提供流动性或创建新交易对。   流动性提供者（LP）  任何人可以向池子存入 等值 的两种代币，赚取交易费用（默认 0.3%）。 LP 份额用 ERC-20 代币表示（LP 代币）。   价格预言机  通过 累积时间加权平均价格（TWAP） 提供更可靠的价格信息。   支持 ERC-20 到 ERC-20 直接交易  V1 只能 ETH &lt;-&gt; ERC-20，V2 允许 ERC-20 &lt;-&gt;...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/01/27/UniswapV2/" title="UniswapV2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-27</div><div class="info-item-2">UniswapV2</div></div><div class="info-2"><div class="info-item-1">UniswapV2Uniswap V2 是以太坊上去中心化交易所（DEX）的第二个主要版本。它使用 自动做市商（AMM） 机制，允许用户在无需订单簿的情况下进行代币交易。以下是 Uniswap V2 的核心概念和关键点：  1. Uniswap V2 主要特性 基于 AMM（自动做市商）  采用 恒定乘积公式 x * y &#x3D; L^2^，保证流动性池中两个代币的乘积保持不变。   流动性池（Liquidity Pools）  由两个代币组成，例如 ETH&#x2F;USDC。 交易由池内资产重新平衡完成。   去中心化 &amp; 无需许可  任何人都可以提供流动性或创建新交易对。   流动性提供者（LP）  任何人可以向池子存入 等值 的两种代币，赚取交易费用（默认 0.3%）。 LP 份额用 ERC-20 代币表示（LP 代币）。   价格预言机  通过 累积时间加权平均价格（TWAP） 提供更可靠的价格信息。   支持 ERC-20 到 ERC-20 直接交易  V1 只能 ETH &lt;-&gt; ERC-20，V2 允许 ERC-20 &lt;-&gt;...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zhaojx</div><div class="author-info-description">寻常朝暮，只身留我一人南渡.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:zhaojinxiu6@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Uniswap-V3"><span class="toc-number">1.</span> <span class="toc-text">Uniswap V3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E4%B8%AD%E6%B5%81%E5%8A%A8%E6%80%A7"><span class="toc-number">1.0.1.</span> <span class="toc-text">集中流动性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E6%97%B6%E6%B5%81%E5%8A%A8%E6%80%A7%EF%BC%88JIT-Liquidity%EF%BC%89"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">准时流动性（JIT Liquidity）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E9%95%BF%E6%9C%9F-LP-%E4%B8%8D%E5%85%AC%E5%B9%B3"><span class="toc-number">1.0.1.1.1.</span> <span class="toc-text">对长期 LP 不公平</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E5%8F%91%E6%B2%BB%E7%90%86%E5%92%8C%E8%AE%BE%E8%AE%A1%E8%AE%A8%E8%AE%BA"><span class="toc-number">1.0.1.1.2.</span> <span class="toc-text">引发治理和设计讨论</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E7%94%A8%E6%88%B7%E4%BA%A4%E6%98%93%E6%9C%89%E4%B8%80%E5%AE%9A%E5%A5%BD%E5%A4%84"><span class="toc-number">1.0.1.1.3.</span> <span class="toc-text">对用户交易有一定好处</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E5%8A%A8%E6%80%A7%E5%87%80%E5%8F%98%E5%8A%A8%EF%BC%88Liquidity-Net%EF%BC%89"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">流动性净变动（Liquidity Net）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E5%8A%A8%E6%80%A7%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">流动性管理方式的不同</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TWAP%EF%BC%88%E6%97%B6%E9%97%B4%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E4%BB%B7%E6%A0%BC%EF%BC%89%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E4%B8%8D%E5%90%8C"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">TWAP（时间加权平均价格）的计算方式不同</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E9%97%B4%E7%9A%84%E5%AE%BD%E5%BA%A6%E5%AF%B9%E6%B5%81%E5%8A%A8%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">区间的宽度对流动性的影响</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Factory-%E5%90%88%E7%BA%A6%E4%B8%AD%E7%9A%84-TickSpacing-%E4%B8%8E-Fee-%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">Factory 合约中的 TickSpacing 与 Fee 的设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-basis-points%EF%BC%9F"><span class="toc-number">1.0.1.7.</span> <span class="toc-text">什么是 basis points？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Factory%E5%90%88%E7%BA%A6%E5%88%9B%E5%BB%BA%E6%96%B0%E6%B1%A0%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">1.0.2.</span> <span class="toc-text">使用Factory合约创建新池的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%B1%A0%E6%97%B6%E6%97%A0%E6%9D%83%E9%99%90%E7%9A%84%EF%BC%88permissionless%EF%BC%89"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">创建池时无权限的（permissionless）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tick-bitmap%EF%BC%88%E5%88%BB%E5%BA%A6%E4%BD%8D%E5%9B%BE%EF%BC%89"><span class="toc-number">1.0.3.</span> <span class="toc-text">tick bitmap（刻度位图）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86-tick-%E5%AD%98%E5%85%A5-tick-bitmap-%E7%9A%84%E8%BF%87%E7%A8%8B%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">1.0.4.</span> <span class="toc-text">将 tick 存入 tick bitmap 的过程如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E-tick-bitmap-%E4%B8%AD%E8%AF%BB%E5%8F%96-tick-%E7%9A%84%E8%BF%87%E7%A8%8B%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">1.0.5.</span> <span class="toc-text">从 tick bitmap 中读取 tick 的过程如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%B8%80%E6%AC%A1swap%E6%93%8D%E4%BD%9C%E4%B8%AD%E7%94%A8%E4%BA%8E%E5%AF%BB%E6%89%BE%E4%B8%8B%E4%B8%80%E4%B8%AAtick"><span class="toc-number">1.0.6.</span> <span class="toc-text">在一次swap操作中用于寻找下一个tick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E4%BB%B7%E6%A0%BC%EF%BC%88Square-Root-Price-X96%EF%BC%89"><span class="toc-number">1.0.7.</span> <span class="toc-text">平方根价格（Square Root Price X96）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Uniswap-%E5%8D%8F%E8%AE%AE%E9%9C%80%E8%A6%81%E5%9C%A8-sqrtPriceX96-%E5%92%8C-tick-%E7%B4%A2%E5%BC%95%E4%B9%8B%E9%97%B4%E8%BF%9B%E8%A1%8C%E5%8F%8C%E5%90%91%E8%BD%AC%E6%8D%A2%E3%80%82%E8%BF%99%E4%B8%AA%E8%BF%87%E7%A8%8B%E7%94%B1-TickMath-%E5%BA%93%E7%9A%84%E4%BB%A5%E4%B8%8B%E4%B8%A4%E4%B8%AA%E5%87%BD%E6%95%B0%E5%A4%84%E7%90%86%EF%BC%9A"><span class="toc-number">1.0.7.1.</span> <span class="toc-text">Uniswap 协议需要在 sqrtPriceX96 和 tick 索引之间进行双向转换。这个过程由 TickMath 库的以下两个函数处理：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Uniswap-v3-%E6%B5%81%E5%8A%A8%E6%80%A7%E6%8F%90%E4%BE%9B%E8%80%85%EF%BC%88LP%EF%BC%89%E7%9A%84%E6%89%8B%E7%BB%AD%E8%B4%B9"><span class="toc-number">1.0.8.</span> <span class="toc-text">Uniswap v3 流动性提供者（LP）的手续费</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Uniswap-V3-%E4%B8%AD%E7%9A%84-TWAP%EF%BC%88%E6%97%B6%E9%97%B4%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E6%95%B0%EF%BC%89"><span class="toc-number">1.0.9.</span> <span class="toc-text">Uniswap  V3 中的 TWAP（时间加权平均数）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E9%A1%B9%E6%95%B0"><span class="toc-number">1.0.9.1.</span> <span class="toc-text">如何计算项数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86-TWAP-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%9B%BF%E6%8D%A2%E4%B8%BA-tick-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.0.9.2.</span> <span class="toc-text">将 TWAP 表达式替换为 tick 表达式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97Token-X%E5%92%8CToken-Y%E7%9A%84TWAP"><span class="toc-number">1.0.10.</span> <span class="toc-text">计算Token X和Token Y的TWAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Uniswap-V3-Factory-Contact-Calls"><span class="toc-number">1.0.11.</span> <span class="toc-text">Uniswap V3 Factory Contact Calls</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Uniswap-V3-%E7%9A%84Swap"><span class="toc-number">1.0.12.</span> <span class="toc-text">Uniswap V3 的Swap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swap-%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B3%E9%94%AE%E8%BE%93%E5%85%A5%E5%8F%82%E6%95%B0%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">1.0.13.</span> <span class="toc-text">swap 函数的关键输入参数如下：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E4%BD%93%E7%9A%84%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">1.0.13.1.</span> <span class="toc-text">循环体的处理流程如下：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%A0%B8%E5%BF%83%E8%AE%A1%E7%AE%97%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%9AcomputeSwapStep"><span class="toc-number">1.0.14.</span> <span class="toc-text">执行核心计算的函数：computeSwapStep()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E4%B8%8E%E4%B9%98%E7%AE%97%E6%B3%95%EF%BC%88Square-and-Multiply-Algorithm%EF%BC%89"><span class="toc-number">1.0.15.</span> <span class="toc-text">平方与乘算法（Square and Multiply Algorithm）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E6%8C%87%E6%95%B0%E5%BA%8F%E5%88%97%EF%BC%88Squared-Exponents-Sequence%EF%BC%89"><span class="toc-number">1.0.15.1.</span> <span class="toc-text">平方指数序列（Squared Exponents Sequence）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E6%95%B0%E5%BA%95%E6%95%B0%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E4%B9%98%E6%B3%95%EF%BC%88Fractional-Base%EF%BC%89%E5%92%8C%E5%88%86%E6%95%B0%E6%8C%87%E6%95%B0%E7%9A%84%E5%B9%B3%E6%96%B9%E4%B8%8E%E4%B9%98%E6%B3%95%E7%AE%97%E6%B3%95%EF%BC%88Fractional-Exponents%EF%BC%89"><span class="toc-number">1.0.15.2.</span> <span class="toc-text">小数底数的平方与乘法（Fractional Base）和分数指数的平方与乘法算法（Fractional Exponents）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B9%B3%E6%96%B9%E6%8C%87%E6%95%B0%E5%BA%8F%E5%88%97%E4%B8%AD%E6%8C%91%E9%80%89%E5%85%83%E7%B4%A0"><span class="toc-number">1.0.15.3.</span> <span class="toc-text">如何在平方指数序列中挑选元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%8D%81%E8%BF%9B%E5%88%B6%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.0.15.4.</span> <span class="toc-text">二进制转十进制回顾</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E8%BF%90%E7%AE%97%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.0.15.5.</span> <span class="toc-text">二进制与运算的原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%AD%EF%BC%9A%E4%BD%BF%E7%94%A8%E5%AE%9A%E7%82%B9%E6%95%B0%E7%9A%84%E5%B9%B3%E6%96%B9-%E4%B9%98%E6%B3%95%E7%AE%97%E6%B3%95"><span class="toc-number">1.0.15.6.</span> <span class="toc-text">实际应用中：使用定点数的平方-乘法算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E6%8C%87%E6%95%B0%E8%BF%90%E7%AE%97%E7%9A%84opcode"><span class="toc-number">1.0.15.7.</span> <span class="toc-text">为什么不直接使用指数运算的opcode</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q%E6%95%B0%E6%A0%BC%E5%BC%8F%EF%BC%88Q-Number-Format%EF%BC%89"><span class="toc-number">1.0.16.</span> <span class="toc-text">Q数格式（Q Number Format）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Solidity%E4%B8%AD%E5%AE%9A%E7%82%B9%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E8%83%8C%E6%99%AF"><span class="toc-number">1.0.16.1.</span> <span class="toc-text">Solidity中定点数的使用背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q%E6%95%B0%E6%A0%BC%E5%BC%8F%E7%BB%93%E6%9E%84"><span class="toc-number">1.0.16.2.</span> <span class="toc-text">Q数格式结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-%E6%95%B0%E5%8A%A0-%E5%87%8F-%E6%B3%95"><span class="toc-number">1.0.16.3.</span> <span class="toc-text">Q 数加(减)法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-%E6%95%B0%E4%B9%98%E6%B3%95"><span class="toc-number">1.0.16.4.</span> <span class="toc-text">Q 数乘法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-%E6%95%B0%E9%99%A4%E6%B3%95"><span class="toc-number">1.0.16.5.</span> <span class="toc-text">Q 数除法</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/27/UniswapV2/" title="UniswapV2">UniswapV2</a><time datetime="2026-01-27T12:00:00.000Z" title="发表于 2026-01-27 20:00:00">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/27/UniswapV3/" title="UniswapV3">UniswapV3</a><time datetime="2026-01-27T12:00:00.000Z" title="发表于 2026-01-27 20:00:00">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92/" title="Web实习计划（一）">Web实习计划（一）</a><time datetime="2026-01-16T14:00:37.000Z" title="发表于 2026-01-16 22:00:37">2026-01-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/16/Web%E5%AE%9E%E4%B9%A0%E8%AE%A1%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Web实习计划（二）">Web实习计划（二）</a><time datetime="2026-01-16T14:00:37.000Z" title="发表于 2026-01-16 22:00:37">2026-01-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/DLNU25ctfwp/" title="DLNU25ctf考核wp">DLNU25ctf考核wp</a><time datetime="2025-01-19T14:00:37.000Z" title="发表于 2025-01-19 22:00:37">2025-01-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/background3.jpg);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2026 By zhaojx</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2520739691" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><script defer src="/js/denglong.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
